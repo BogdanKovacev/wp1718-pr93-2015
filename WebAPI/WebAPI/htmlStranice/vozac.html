@@ -47,12 +47,20 @@
                     $("#lozinka").val(data.Lozinka);
                     $("#jmbg").val(data.Jmbg);
                     $("#email").val(data.Email);
-                    $("#uloga").val(data.Uloga);
                     $("#voznje").val(data.VoznjeKorisnika);
                     $("#godisteAutomobila").val(data.Automobil.GodisteAutomobila);
-                    $("#brojRegistarskeOznake").val(data.Automobil.BrojRegistarskeOznake);
+                    $("#registracija").val(data.Automobil.Registracija);
+                    $("#uloga").val(data.Uloga);
                     $("#brojTaksiVozila").val(data.Automobil.BrojTaksiVozila);
-                    $("#tipAutomobila").val(data.Automobil.TipAutomobila);
+                    if (data.TipAutomobila == 0) {
+                        $("#Putnicki").attr("selected", "true");
+                    }
+                    else if (data.TipAutomobila == 1) {
+                        $("#Kombi").attr("selected", "true");
+                    }
+                    else if (data.TipAutomobila == 2){
+                        $("#Podrazumevani").attr("selected", "true");
+                    }
                 });
             });
         });
@@ -74,7 +82,7 @@
         <div id="My Profile" class="tabcontent">
             <h3>My Profile</h3>
             
-            <form action="api/vozac" method="post" id="promeniVozaca">
+            <form method="post" id="promeniVozaca">
                 <p>
                     <table>
                         <tr>
@@ -119,11 +127,6 @@
                             <td><input type="text" name="email" id="email"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <input type="hidden" id="uloga" readonly>
-                            </td>
-                        </tr>
-                        <tr>
                             <th>Godiste vozila: </th>
                             <td><input type="text" readonly id="godisteAutomobila"></td>
                         </tr>
@@ -137,8 +140,15 @@
                         </tr>
                         <tr>
                             <th>Tip vozila: </th>
-                            <td><input type="text" readonly id="tipAutomobila"></td>
+                            <td>
+                                <select id="tipAutomobila" name="tipAutomobila">
+                                    <option value="Putnicki" id="Putnicki">Putnicki</option>
+                                    <option value="Kombi" id="Kombi">Kombi</option>
+                                    <option value="Podrazumevani" id="Podrazumevani">Podrazumevani</option>
+                                </select>
+                            </td>
                         </tr>
+                        <tr><input type="hidden" name="uloga" id="uloga" value="Vozac"></tr>
                         <tr>
                             <th>Voznje: </th>
                             <td><input type="text" name="voznje"></td>

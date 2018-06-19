@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            Temp.V = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, korisnik.Uloga, korisnik.VoznjeKorisnika, korisnik.Lokacija, korisnik.Automobil);
+            Temp.V = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, UlogaEnum.Vozac, korisnik.VoznjeKorisnika, korisnik.Lokacija, korisnik.Automobil);
 
             foreach (Vozac musterija in ListaVozaca.Vozaci)
             {
@@ -28,7 +28,16 @@ namespace WebAPI.Controllers
                 {
                     ListaVozaca.Vozaci.Remove(korisnik);
                     List<Voznja> listaV = musterija.VoznjeKorisnika;
-                    ListaVozaca.Vozaci.Add(new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, UlogaEnum.Musterija, listaV,musterija.Lokacija,musterija.Automobil));
+                    Automobil a = new Automobil();
+                    foreach(Vozac v in ListaVozaca.Vozaci)
+                    {
+                        if(v.KorisnickoIme.Equals(korisnik.KorisnickoIme))
+                        {
+                            a = v.Automobil;
+                        }
+                    }
+                    ListaVozaca.Vozaci.Add(new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, UlogaEnum.Vozac, listaV,musterija.Lokacija,a));
+                    Temp.V = new Vozac(korisnik.KorisnickoIme, korisnik.Lozinka, korisnik.Ime, korisnik.Prezime, korisnik.Pol, korisnik.Jmbg, korisnik.KontaktTelefon, korisnik.Email, UlogaEnum.Vozac, listaV, musterija.Lokacija, a);
                     break;
                 }
             }

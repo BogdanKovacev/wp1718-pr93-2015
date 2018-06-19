@@ -35,15 +35,17 @@ namespace WebAPI.Controllers
                 {
                     vozacP.Automobil = automobil;
                     automobil.Slobodan = false;
-                    automobil.Vozac = vozacP;
+                    automobil.Vozac = vozacP.KorisnickoIme;
                     vozacP.Automobil = automobil;
+                    break;
                 }
             }
 
             vozacP.Lokacija = new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000");
 
             ListaVozaca.Vozaci.Add(vozacP);
-            return Redirect("http://localhost:10482/dispecer.html");
+            return StatusCode(HttpStatusCode.NoContent);
+
         }
     }
 }

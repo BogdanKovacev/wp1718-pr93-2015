@@ -8,6 +8,5 @@ namespace WebAPI.Models
     public class ListaVozaca
     {
         public static List<Vozac> Vozaci { get; set; } = new List<Vozac>();
-
     }
 }

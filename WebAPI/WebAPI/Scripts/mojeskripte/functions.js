@@ -38,7 +38,7 @@ function promenaVozaca() {
     $.post('/api/vozac/', $('form#promeniVozaca').serialize())
         .done(function (status, data, xhr) {
             alert(data);
-            startPocetna();
+            startVozac();
         }).fail(function (jqXHR, textStatus) {
             alert(jqXHR.responseJSON["Message"]);
         });
@@ -48,7 +48,7 @@ function kreirajVozacaFunkcija() {
     $.post('/api/dispecerDodajVozaca/', $('form#kreirajVozacaId').serialize())
         .done(function (status, data, xhr) {
             alert(data);
-            startPocetna();
+            startDispecer();
         }).fail(function (jqXHR, textStatus) {
             alert(jqXHR.responseJSON["Message"]);
         });

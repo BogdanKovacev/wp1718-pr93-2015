@@ -7,14 +7,14 @@ namespace WebAPI.Models
 {
     public class Automobil
     {
-        public Vozac Vozac { get; set; }
+        public string Vozac { get; set; }
         public int GodisteAutomobila { get; set; }
         public string Registracija { get; set; } 
         public int BrojTaksiVozila { get; set; }
         public TipVozilaEnum TipAutomobila { get; set; }
         public bool Slobodan { get; set; }
 
-        public Automobil(Vozac vozac, int godisteAutomobila, string registracija, int brojTaksiVozila, TipVozilaEnum tipAutomobila)
+        public Automobil(string vozac, int godisteAutomobila, string registracija, int brojTaksiVozila, TipVozilaEnum tipAutomobila)
         {
             this.Vozac = vozac;
             this.GodisteAutomobila = godisteAutomobila;
