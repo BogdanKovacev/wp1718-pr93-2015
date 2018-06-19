@@ -7,19 +7,21 @@ namespace WebAPI.Models
 {
     public class Lokacija
     {
-        int x;
-        int y;
-        string adresa;
+        public string X { get; set; }
+        public string Y { get; set; }
+        public string Adresa { get; set; }
 
-        public Lokacija(int x, int y, string adresa)
+        public Lokacija(string x, string y, string adresa)
         {
             this.X = x;
             this.Y = y;
             this.Adresa = adresa;
         }
 
-        public int X { get => x; set => x = value; }
-        public int Y { get => y; set => y = value; }
-        public string Adresa { get => adresa; set => adresa = value; }
+        public Lokacija()
+        {
+
+        }
+        
     }
 }

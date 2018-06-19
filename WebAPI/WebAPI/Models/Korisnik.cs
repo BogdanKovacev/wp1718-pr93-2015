@@ -7,16 +7,21 @@ namespace WebAPI.Models
 {
     public class Korisnik
     {
-        string korisnickoIme;
-        string lozinka;
-        string ime;
-        string prezime;
-        PolEnum pol;
-        string jmbg;
-        string kontaktTelefon;
-        string email;
-        UlogaEnum uloga;
-        List<Voznja> voznjeKorisnika;
+        public string KorisnickoIme { get; set; }
+        public string Lozinka { get; set; }
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public PolEnum Pol { get; set; }
+        public string Jmbg { get; set; }
+        public string KontaktTelefon { get; set; }
+        public string Email { get; set; }
+        public UlogaEnum Uloga { get; set; }
+        public List<Voznja> VoznjeKorisnika { get; set; }
+
+        public Korisnik()
+        {
+
+        }
 
         public Korisnik(string korisnickoIme, string lozinka, string ime, string prezime, PolEnum pol, string jmbg, string kontaktTelefon, string email, UlogaEnum uloga, List<Voznja> voznjeKorisnika)
         {
@@ -29,18 +34,7 @@ namespace WebAPI.Models
             this.KontaktTelefon = kontaktTelefon;
             this.Email = email;
             this.Uloga = uloga;
-            this.VoznjeKorisnika = voznjeKorisnika;
+            this.VoznjeKorisnika = new List<Voznja>();
         }
-
-        public string KorisnickoIme { get => korisnickoIme; set => korisnickoIme = value; }
-        public string Lozinka { get => lozinka; set => lozinka = value; }
-        public string Ime { get => ime; set => ime = value; }
-        public string Prezime { get => prezime; set => prezime = value; }
-        public PolEnum Pol { get => pol; set => pol = value; }
-        public string Jmbg { get => jmbg; set => jmbg = value; }
-        public string KontaktTelefon { get => kontaktTelefon; set => kontaktTelefon = value; }
-        public string Email { get => email; set => email = value; }
-        public UlogaEnum Uloga { get => uloga; set => uloga = value; }
-        public List<Voznja> VoznjeKorisnika { get => voznjeKorisnika; set => voznjeKorisnika = value; }
     }
 }

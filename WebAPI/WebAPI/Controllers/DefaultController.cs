@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -14,7 +15,7 @@ namespace WebAPI.Controllers
         public RedirectResult Index()
         {
             var requestUri = Request.RequestUri;
-            return Redirect(requestUri.AbsoluteUri + "index.html");
-        }
+            return Redirect(requestUri.AbsoluteUri + "pocetniHTML.html");
+        }        
     }
 }

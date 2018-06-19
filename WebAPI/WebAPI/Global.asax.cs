@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebAPI.Models;
 
 namespace WebAPI
 {
@@ -18,6 +19,36 @@ namespace WebAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ListaAutomobila.Create();
+
+            string text = System.IO.File.ReadAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\dispeceri.txt");
+            string[] line = text.Split('=',';');
+            int count = line.Count()/18;
+            for(int i = 0; i < count ; i++)
+            {
+                PolEnum polTemp = PolEnum.Muski;
+                if (line[18*i + 9].Equals("Muski"))
+                {
+                    polTemp = PolEnum.Muski;
+                }
+                else
+                {
+                    polTemp = PolEnum.Zenski;
+                }
+
+                List<Voznja> listaTemp = new List<Voznja>();
+
+                foreach(Musterija m in ListaMusterija.Musterije)
+                {
+                    foreach(Voznja v in m.VoznjeKorisnika)
+                    {
+                        listaTemp.Add(v);
+                    }
+                }
+
+                ListaDispecera.Dispeceri.Add(new Dispecer(line[i*18+1], line[i * 18 + 3], line[i * 18 + 5], line[i * 18 + 7], polTemp, line[i * 18 + 11], line[i * 18 + 13], line[i * 18 + 15], UlogaEnum.Dispecer, listaTemp));
+            }
         }
     }
 }

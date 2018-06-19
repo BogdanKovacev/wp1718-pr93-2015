@@ -7,11 +7,11 @@ namespace WebAPI.Models
 {
     public class Komentar
     {
-        string opis;
-        DateTime datumObjave;
-        Korisnik korisnik;
-        Voznja voznja;
-        int ocenaVoznje;
+        public string Opis { get; set; }
+        public DateTime DatumObjave { get; set; }
+        public Korisnik Korisnik { get; set; }
+        public Voznja Voznja { get; set; }
+        public int OcenaVoznje { get; set; }
 
         public Komentar(string opis, DateTime datumObjave, Korisnik korisnik, Voznja voznja, int ocenaVoznje)
         {
@@ -21,11 +21,6 @@ namespace WebAPI.Models
             this.Voznja = voznja;
             this.OcenaVoznje = ocenaVoznje;
         }
-
-        public string Opis { get => opis; set => opis = value; }
-        public DateTime DatumObjave { get => datumObjave; set => datumObjave = value; }
-        public Korisnik Korisnik { get => korisnik; set => korisnik = value; }
-        public Voznja Voznja { get => voznja; set => voznja = value; }
-        public int OcenaVoznje { get => ocenaVoznje; set => ocenaVoznje = value; }
+        
     }
 }

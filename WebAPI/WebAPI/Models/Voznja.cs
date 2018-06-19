@@ -7,16 +7,16 @@ namespace WebAPI.Models
 {
     public class Voznja
     {
-        DateTime datum;
-        Lokacija lokacijaTaksija;
-        TipVozilaEnum tipVozila;
-        Musterija musterija;
-        Lokacija odrediste;
-        Dispecer dispecer;
-        Vozac vozac;
-        double iznos;
-        Komentar komentar;
-        StatusVoznje statusVoznje;
+        public DateTime Datum { get; set; }
+        public Lokacija LokacijaTaksija { get; set; }
+        public TipVozilaEnum TipVozila { get; set; }
+        public Musterija Musterija { get; set; }
+        public Lokacija Odrediste { get; set; }
+        public Dispecer Dispecer { get; set; }
+        public Vozac Vozac { get; set; }
+        public double Iznos { get; set; }
+        public Komentar Komentar { get; set; }
+        public StatusVoznje StatusVoznje { get; set; }
 
         public Voznja(DateTime datum, Lokacija lokacijaTaksija, TipVozilaEnum tipVozila, Musterija musterija, Lokacija odrediste, Dispecer dispecer, Vozac vozac, double iznos, Komentar komentar, StatusVoznje statusVoznje)
         {
@@ -32,15 +32,9 @@ namespace WebAPI.Models
             this.StatusVoznje = statusVoznje;
         }
 
-        public DateTime Datum { get => datum; set => datum = value; }
-        public Lokacija LokacijaTaksija { get => lokacijaTaksija; set => lokacijaTaksija = value; }
-        public TipVozilaEnum TipVozila { get => tipVozila; set => tipVozila = value; }
-        public Musterija Musterija { get => musterija; set => musterija = value; }
-        public Lokacija Odrediste { get => odrediste; set => odrediste = value; }
-        public Dispecer Dispecer { get => dispecer; set => dispecer = value; }
-        public Vozac Vozac { get => vozac; set => vozac = value; }
-        public double Iznos { get => iznos; set => iznos = value; }
-        public Komentar Komentar { get => komentar; set => komentar = value; }
-        public StatusVoznje StatusVoznje { get => statusVoznje; set => statusVoznje = value; }
+        public Voznja()
+        {
+
+        }
     }
 }

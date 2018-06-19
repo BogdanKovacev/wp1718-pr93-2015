@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="proba.css">
+
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+
+    <script type="text/javascript">
+
+        function openPage(pageName, elmnt, color) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = color;
+
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tab1").click(function () {
+                $.get("/api/loggin", function (data, status) {
+                    let ulogovaniKorisnik = JSON.parse(localStorage.getItem("ulogovan"));
+                    $("#korisnickoIme").val(data.KorisnickoIme);
+                    $("#ime").val(data.Ime);
+                    $("#prezime").val(data.Prezime);
+                    if (data.Pol == 0) {
+                        $("#Muski").attr("selected", "true");
+                    }
+                    else {
+                        $("#Zenski").attr("selected", "true");
+                    } 
+                    $("#kontaktTelefon").val(data.KontaktTelefon);
+                    $("#lozinka").val(data.Lozinka);
+                    $("#jmbg").val(data.Jmbg);
+                    $("#email").val(data.Email);
+                    $("#uloga").val(data.Uloga);
+                    $("#voznje").val(data.VoznjeKorisnika);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+	<h1>MUSTERIJA</h1>
+	<!-- Tab links -->
+
+	<button class="tablink" id="tab1" onclick="openPage('My Profile', this)">My Profile</button>
+	<button class="tablink" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
+	
+	
+    <div id="My Profile" class="tabcontent">
+        <h3>My Profile</h3>
+
+
+        <form method="post" id="musterijaPromena">
+            <p>
+                <table>
+                    <tr>
+                        <th colspan="2" align="center">Vaši podaci</th>
+                    </tr>
+                    <tr>
+                        <th>Korisnicko ime: </th>
+                        <td><input type="text" readonly id="korisnickoIme" name="korisnickoIme"></td>
+                    </tr>
+                    <tr>
+                        <th>Lozinka: </th>
+                        <td><input type="text" id="lozinka" name="lozinka"></td>
+                    </tr>
+                    <tr>
+                        <th>Ime: </th>
+                        <td><input type="text" id="ime" name="ime"></td>
+                    </tr>
+                    <tr>
+                        <th>Prezime: </th>
+                        <td><input type="text" id="prezime" name="prezime"></td>
+                    </tr>
+                    <tr>
+
+                        <th>Pol: </th>
+                        <td>
+                            <select id="pol" name="pol">
+                                <option value="Muski" id="Muski">Muski</option>
+                                <option value="Zenski" id="Zenski">Zenski</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>JMBG: </th>
+                        <td><input type="text" id="jmbg" name="jmbg"></td>
+                    </tr>
+                    <tr>
+                        <th>Kontakt telefon: </th>
+                        <td><input type="text" id="kontaktTelefon" name="kontaktTelefon"></td>
+                    </tr>
+                    <tr>
+                        <th>E-mail: </th>
+                        <td><input type="text" id="email" name="email"></td>
+                    </tr>
+                    <tr>
+                        <th>Voznje: </th>
+                        <td><input type="text" id="voznje" name="voznje"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
+                    </tr>
+                </table>
+            </p>
+        </form>
+        <script>
+            validatePromena();
+        </script>
+
+    </div>
+	<div id="Zahtev za voznju" class="tabcontent">
+		Unesite lokaciju: <input type="text" name="lokacija">
+		Vozilo: <input type="text" name="vozilo">
+		<input type="submit" value="Naruci">
+		<input type="submit" value="Ponisti">
+	</div>
+</body>
+</html>
