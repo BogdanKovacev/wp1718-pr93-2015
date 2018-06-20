@@ -32,6 +32,35 @@
             
         }
 
+        function pom(i)
+        {
+            var a = i
+
+            alert(a);
+                $.ajax({
+                    url: 'api/izmena/post',
+                    method: 'POST',
+                    data: {
+                        KorisnickoImeVozaca: i
+                    }
+                });
+            document.getElementById("Voznje").click();
+        }
+
+        function pom2(i) {
+            var a = i
+
+            alert(a);
+            $.ajax({
+                url: 'api/izmenaVoznje/post',
+                method: 'POST',
+                data: {
+                    KorisnickoImeVozaca: i
+                }
+            });
+
+        }
+
 
     </script>
     <script type="text/javascript">
@@ -49,7 +78,7 @@
                     }
                     else {
                         $("#Zenski").attr("selected", "true");
-                    } 
+                    }
                     $("#kontaktTelefon").val(data.KontaktTelefon);
                     $("#lozinka").val(data.Lozinka);
                     $("#jmbg").val(data.Jmbg);
@@ -59,49 +88,52 @@
                 });
             });
             $("#Voznje").click(function () {
+                $("#tabela").empty();
+                var s1 = $("<th></th>").text("Lokacija");
+                var s2 = $("<th></th>").text("Vreme porucivalja");
+                var s3 = $("<th colspan=\"2\"></th>").text("Opcije");
+                $("#tabela").append("<tr>", s1, s2, s3, "</tr>");
                 $.get("/api/voznjeKorisnika", function (data, status) {
                     var i;
-                    var o;
-                    var iz;
-                    var korisnik;
-                    $("#tabela").empty();
-                    var s1 = $("<th></th>").text("Lokacija");
-                    var s2 = $("<th></th>").text("Vreme porucivalja");
-                    var s3 = $("<th colspan=\"2\"></th>").text("Opcije");
-                    for (i = 0; i < data.length; i++) {                        
+                    for (i = 0; i < data.length; i++) {
+                        var o;
+                        var iz;
+                        var korisnik;
                         var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
                         var txt3 = $("<td></td>").text(data[i].Datum);
-                        var txt4 = $("<input type=\"submit\" value=\"izmeni\">").attr("id", "izmeni_" + i);
-                        var txt5 = $("<input type=\"submit\" value=\"obrisi\">").attr("id", "obrisi_" + i);
-                        $("#tabela").append("<tr>",s1,s2,s3,"</tr>","<tr>", txt2, txt3, txt4, txt5, "</tr>");
+                        var txt7 = $("<td></td>").text(i);
+                        var txt4 = $("<input type=\"submit\" value=\"izmeni\" onclick=\"pom2(" + i + ")\">").attr("id", "izmeni_" + i);
+                        var txt5 = $("<input type=\"submit\" value=\"obrisi\" onclick=\"pom(" + i + ")\">").attr("id", "obrisi_" + i);
+                        $("#tabela").append("<tr>", txt2, txt3, txt4, txt5,txt7, "</tr>");
                         korisnik = data[i].Musterija;
-                        iz = "izmeni_" + i;
-                        o = "obrisi_" + i;
-                        $("#izmeni_" + i).click(function () {
+                        iz = i;
+                        o = i;
+                        /*$("#izmeni_" + i).click(function (i) {
+                            alert("udje ti" + i);
                             $.ajax({
                                 url: 'api/izmena/post',
                                 method: 'POST',
                                 data: {
-                                    KorisnickoImeVozaca: iz,
+                                    KorisnickoImeVozaca: i,
                                     Lokacija2: korisnik
                                 }
                             });
-                            alert("udje ti");
+                            
                             document.getElementById("Voznje").click();
-                        });
-                        $("#obrisi_" + i).click(function () {
+                        });*/
+                       /*$("#obrisi_" + i).click(function () {
                             $.ajax({
                                 url: 'api/izmena/post',
                                 method: 'POST',
                                 data: {
-                                    KorisnickoImeVozaca: o,
+                                    KorisnickoImeVozaca: i,
                                     Lokacija2: korisnik
                                 }
                             });
                             document.getElementById("Voznje").click();
-                        });
+                        });*/
                     }
-                   
+
                 });
             });
         });

@@ -171,6 +171,7 @@
     <Compile Include="Controllers\DispecerDodajVozacaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmenaController.cs" />
+    <Compile Include="Controllers\IzmenaVoznjeController.cs" />
     <Compile Include="Controllers\LogginController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\MusterijaZahtevController.cs" />

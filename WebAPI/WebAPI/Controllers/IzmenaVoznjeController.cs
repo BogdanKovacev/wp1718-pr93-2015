@@ -9,7 +9,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class IzmenaController : ApiController
+    public class IzmenaVoznjeController : ApiController
     {
         [ResponseType(typeof(void))]
         public IHttpActionResult Post(TempLokacija korisnik)
@@ -18,13 +18,13 @@ namespace WebAPI.Controllers
 
             Voznja tempVoznja = null;
             List<Voznja> lista = new List<Voznja>();
-           
+
 
             int index = Int32.Parse(temp);
-
-            foreach(Voznja voz in Temp.M.VoznjeKorisnika)
+            
+            foreach (Voznja voz in Temp.M.VoznjeKorisnika)
             {
-                if(voz.StatusVoznje.Equals(StatusVoznje.Kreirana))
+                if (voz.StatusVoznje.Equals(StatusVoznje.Kreirana))
                 {
                     lista.Add(voz);
                 }
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            
+
 
             return StatusCode(HttpStatusCode.NoContent);
 
