@@ -3,7 +3,7 @@
 }
 
 function startPocetna() {
-    $("div#pocetnaDiv").load("./htmlStranice/musterija.html");
+    $("div#pocetnaDiv").load("./htmlStranice/musterija.html#My Profile");
 }
 
 function startDispecer() {

@@ -6,7 +6,7 @@ using System.Web;
 namespace WebAPI.Models
 {
     public class Voznja
-    {
+    {        
         public DateTime Datum { get; set; }
         public Lokacija LokacijaTaksija { get; set; }
         public TipVozilaEnum TipVozila { get; set; }

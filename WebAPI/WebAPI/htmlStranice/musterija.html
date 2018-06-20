@@ -29,13 +29,14 @@
 
             // Add the specific color to the button used to open the tab content
             elmnt.style.backgroundColor = color;
-
+            
         }
 
 
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+            document.getElementById("tab2").click();
             $("#tab1").click(function () {
                 $.get("/api/loggin", function (data, status) {
                     let ulogovaniKorisnik = JSON.parse(localStorage.getItem("ulogovan"));
@@ -60,10 +61,45 @@
             $("#Voznje").click(function () {
                 $.get("/api/voznjeKorisnika", function (data, status) {
                     var i;
+                    var o;
+                    var iz;
+                    var korisnik;
+                    $("#tabela").empty();
+                    var s1 = $("<th></th>").text("Lokacija");
+                    var s2 = $("<th></th>").text("Vreme porucivalja");
+                    var s3 = $("<th colspan=\"2\"></th>").text("Opcije");
                     for (i = 0; i < data.length; i++) {                        
                         var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
                         var txt3 = $("<td></td>").text(data[i].Datum);
-                        $("#tabela").append("<tr>",txt2,txt3,"</tr>");
+                        var txt4 = $("<input type=\"submit\" value=\"izmeni\">").attr("id", "izmeni_" + i);
+                        var txt5 = $("<input type=\"submit\" value=\"obrisi\">").attr("id", "obrisi_" + i);
+                        $("#tabela").append("<tr>",s1,s2,s3,"</tr>","<tr>", txt2, txt3, txt4, txt5, "</tr>");
+                        korisnik = data[i].Musterija;
+                        iz = "izmeni_" + i;
+                        o = "obrisi_" + i;
+                        $("#izmeni_" + i).click(function () {
+                            $.ajax({
+                                url: 'api/izmena/post',
+                                method: 'POST',
+                                data: {
+                                    KorisnickoImeVozaca: iz,
+                                    Lokacija2: korisnik
+                                }
+                            });
+                            alert("udje ti");
+                            document.getElementById("Voznje").click();
+                        });
+                        $("#obrisi_" + i).click(function () {
+                            $.ajax({
+                                url: 'api/izmena/post',
+                                method: 'POST',
+                                data: {
+                                    KorisnickoImeVozaca: o,
+                                    Lokacija2: korisnik
+                                }
+                            });
+                            document.getElementById("Voznje").click();
+                        });
                     }
                    
                 });
@@ -76,7 +112,7 @@
     <!-- Tab links -->
 
     <button class="tablink" id="tab1" onclick="openPage('My Profile', this)">My Profile</button>
-    <button class="tablink" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
+    <button class="tablink" id="tab2" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
     <button class="tablink" id="Voznje" onclick="openPage('Voznje na cekanju', this)">Voznje na cekanju</button>
 
 
@@ -173,14 +209,7 @@
 
     <div id="Voznje na cekanju" class="tabcontent">
             <table border="1" id="tabela">
-                <tr>
-                    <th>
-                        Lokacija
-                    </th>
-                    <th>
-                        Vreme porucivalja
-                    </th>
-                </tr>
+                
             </table>
     </div>
 </body>
