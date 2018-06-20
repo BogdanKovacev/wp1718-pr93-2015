@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
                     return BadRequest("Korisnik vec postoji");
                 }
             }
-
+            musterija.VoznjeKorisnika = new List<Voznja>();
             ListaMusterija.Musterije.Add(musterija);            
 
             return CreatedAtRoute("DefaultApi", new { id = musterija.KorisnickoIme }, musterija);           

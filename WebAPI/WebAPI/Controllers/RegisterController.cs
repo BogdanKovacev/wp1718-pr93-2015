@@ -18,8 +18,6 @@ namespace WebAPI.Controllers
                 int i = 0;
                 foreach (Musterija m in ListaMusterija.Musterije)
                 {
-
-
                     if (musterija.KorisnickoIme.Equals(m.KorisnickoIme))
                     {
                         i++;

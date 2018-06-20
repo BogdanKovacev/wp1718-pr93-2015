@@ -172,10 +172,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogginController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
+    <Compile Include="Controllers\MusterijaZahtevController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
+    <Compile Include="Controllers\VozacLokacijaController.cs" />
+    <Compile Include="Controllers\VoznjeKorisnikaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,10 +197,12 @@
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\StatusVoznje.cs" />
     <Compile Include="Models\Temp.cs" />
+    <Compile Include="Models\TempLokacija.cs" />
     <Compile Include="Models\TipVozilaEnum.cs" />
     <Compile Include="Models\Uloga.cs" />
     <Compile Include="Models\Vozac.cs" />
     <Compile Include="Models\Voznja.cs" />
+    <Compile Include="Models\Voznje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

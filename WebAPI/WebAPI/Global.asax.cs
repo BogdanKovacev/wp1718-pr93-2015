@@ -21,7 +21,9 @@ namespace WebAPI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ListaAutomobila.Create();
-
+            ListaVozaca.Vozaci.Add(new Vozac("vozac","aaaaa","Ivan","Benis",PolEnum.Muski,"2004996800115","0","a@a.a",UlogaEnum.Vozac,null, new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000"),ListaAutomobila.Vozila[3]));
+            Voznje.CreateVoznje();
+            ListaMusterija.Musterije = new List<Musterija>();
             string text = System.IO.File.ReadAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\dispeceri.txt");
             string[] line = text.Split('=',';');
             int count = line.Count()/18;

@@ -40,6 +40,7 @@
                 $.get("/api/loggin", function (data, status) {
                     let ulogovaniKorisnik = JSON.parse(localStorage.getItem("ulogovan"));
                     $("#korisnickoIme").val(data.KorisnickoIme);
+                    $("#korisnickoIme3").val(data.KorisnickoIme);
                     $("#ime").val(data.Ime);
                     $("#prezime").val(data.Prezime);
                     if (data.Pol == 0) {
@@ -56,17 +57,25 @@
                     $("#voznje").val(data.VoznjeKorisnika);
                 });
             });
+            $("#Voznje").click(function () {
+                $.get("/api/voznjeKorisnika", function (data, status) {
+                    for (i = 0; i < data.Count(); i++) {
+                        $("div[name = 'proba']").val(data[i].Lokacija.Adresa);
+                    }
+                });
+            });
         });
     </script>
 </head>
 <body>
-	<h1>MUSTERIJA</h1>
-	<!-- Tab links -->
+    <h1>MUSTERIJA</h1>
+    <!-- Tab links -->
 
-	<button class="tablink" id="tab1" onclick="openPage('My Profile', this)">My Profile</button>
-	<button class="tablink" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
-	
-	
+    <button class="tablink" id="tab1" onclick="openPage('My Profile', this)">My Profile</button>
+    <button class="tablink" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
+    <button class="tablink" id="Voznje" onclick="openPage('Voznje na cekanju', this)">Voznje na cekanju</button>
+
+
     <div id="My Profile" class="tabcontent">
         <h3>My Profile</h3>
 
@@ -130,11 +139,50 @@
         </script>
 
     </div>
-	<div id="Zahtev za voznju" class="tabcontent">
-		Unesite lokaciju: <input type="text" name="lokacija">
-		Vozilo: <input type="text" name="vozilo">
-		<input type="submit" value="Naruci">
-		<input type="submit" value="Ponisti">
-	</div>
+    <div id="Zahtev za voznju" class="tabcontent">
+        <form method="post" id="idZahtev">
+            <table border="1">
+                <tr>
+                    <th>Unesite lokaciju:</th>
+                    <td><input type="text" name="Lokacija.adresa"><input type="hidden" name="korisnickoIme3" id="korisnickoIme3"></td>
+                </tr>
+                <tr>
+                    <th>Vozilo:</th>
+                    <td>
+                        <select id="tipAutomobila" name="Automobil.tipAutomobila">
+                            <option value="Podrazumevani" id="Podrazumevani">Podrazumevani</option>
+                            <option value="Putnicki" id="Putnicki">Putnicki</option>
+                            <option value="Kombi" id="Kombi">Kombi</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Naruci"></td>
+                </tr>
+            </table>
+        </form>
+        <script>
+            ZahtevValidate();
+        </script>
+    </div>
+
+
+    <div id="Voznje na cekanju" class="tabcontent">
+        <table border="1">
+            <tr>
+                <th>Unesite lokaciju:</th>
+                <td><input type="text" name="Lokacija.adresa"><input type="hidden" name="korisnickoIme3" id="korisnickoIme3"></td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="proba">
+                    </div>
+                <td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Naruci"></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

@@ -7,6 +7,6 @@ namespace WebAPI.Models
 {
     public class ListaMusterija
     {
-        public static List<Musterija> Musterije { get; set; } = new List<Musterija>();
+        public static List<Musterija> Musterije { get; set; }
     }
 }

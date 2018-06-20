@@ -384,3 +384,59 @@ function kreirajVozaca() {
         submitHandler: function (form) { kreirajVozacaFunkcija() }
     });
 }
+
+function promeniLokacijuFunkcijaValidate() {
+    $("#promenaLokacije").validate({
+        rules: {
+            lokacija2: {
+                required: true,
+                minlength: 5
+            }
+        },
+        messages: {
+            lokacija2: {
+                required: "Obavezno polje",
+                minlength: "Lokacija mora imati minimum 5 karaktera"
+            }
+        },
+        submitHandler: function (form) { promeniLokacijuFunkcija() }
+    });
+}
+
+function promeniLokacijuFunkcija() {
+    $.post('/api/vozacLokacija/', $('form#promenaLokacije').serialize())
+        .done(function (status, data, xhr) {
+            alert(data);
+            startVozac();
+        }).fail(function (jqXHR, textStatus) {
+            alert(jqXHR.responseJSON["Message"]);
+        });
+}
+
+function ZahtevValidate() {
+    $("#idZahtev").validate({
+        rules: {
+            lokacija: {
+                required: true,
+                minlength: 5
+            }
+        },
+        messages: {
+            lokacija: {
+                required: "Obavezno polje",
+                minlength: "Lokacija mora imati minimum 5 karaktera"
+            }
+        },
+        submitHandler: function (form) { Zahtev() }
+    });
+}
+
+function Zahtev() {
+    $.post('/api/musterijaZahtev/', $('form#idZahtev').serialize())
+        .done(function (status, data, xhr) {
+            alert(data);
+            startPocetna();
+        }).fail(function (jqXHR, textStatus) {
+            alert(jqXHR.responseJSON["Message"]);
+        });
+}

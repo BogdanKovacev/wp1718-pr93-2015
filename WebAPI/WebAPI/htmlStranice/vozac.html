@@ -58,9 +58,15 @@
                     else if (data.TipAutomobila == 1) {
                         $("#Kombi").attr("selected", "true");
                     }
-                    else if (data.TipAutomobila == 2){
+                    else if (data.TipAutomobila == 2) {
                         $("#Podrazumevani").attr("selected", "true");
                     }
+                });
+            });
+            $("#Lokacija2").click(function () {
+                $.get("/api/vozacLokacija", function (data, status) {
+                    $("#lokacija1").val(data.Lokacija.Adresa);
+                    $("#korisnickoImeVozaca").val(data.KorisnickoIme);
                 });
             });
         });
@@ -71,8 +77,8 @@
         <!-- Tab links -->
 
         <button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
-        <button class="tablink" onclick="openPage('My Profile', this)" id="Myprofile">My Profile</button>
-        <button class="tablink" onclick="openPage('Lokacija', this)">Lokacija</button>
+        <button class="tablink" id="Myprofile" onclick="openPage('My Profile', this)">My Profile</button>
+        <button class="tablink" id="Lokacija2" onclick="openPage('Lokacija', this)">Lokacija</button>
         <button class="tablink" onclick="openPage('Trenutna voznja', this)">Trenutna voznja</button>
 
         <div id="Pocetna" class="tabcontent">
@@ -164,10 +170,28 @@
             </script>
             
         </div>
+
         <div id="Lokacija" class="tabcontent">
-            Vasa trenutna lokacija: <input type="text" name="lokacija">
-            <input type="submit" value="Sacuvaj">
+            <form method="post" id="promenaLokacije">
+                <table border="1">
+                    <tr>
+                        <th>Vasa lokacija:</th>
+                        <td><input type="text" readonly id="lokacija1" name="lokacija1"></td>
+                    </tr>
+                    <tr>
+                        <th>Unesite trenutnu lokaciju:</th>
+                        <td><input type="text" name="lokacija2" id="lokacija2"><input type="hidden" name="korisnickoImeVozaca" id="korisnickoImeVozaca"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" id="dugme" value="Sacuvaj"></td>
+                    </tr>
+                </table>
+            </form>
+            <script>
+                promeniLokacijuFunkcijaValidate();
+            </script>
         </div>
+
         <div id="Trenutna voznja" class="tabcontent">
             Vasa trenutna lokacija: <input type="text" name="lokacija">
             Status voznje: <select>
