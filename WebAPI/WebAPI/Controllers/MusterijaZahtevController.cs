@@ -14,7 +14,8 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult Post(Vozac korisnik)
         {
-            Voznja voznja = new Voznja(DateTime.Now, korisnik.Lokacija, korisnik.Automobil.TipAutomobila, Temp.M.KorisnickoIme, null, "", "", -1, null, StatusVoznje.Kreirana);
+            Lokacija l = new Lokacija();
+            Voznja voznja = new Voznja(DateTime.Now, korisnik.Lokacija, korisnik.Automobil.TipAutomobila, Temp.M.KorisnickoIme,new Lokacija(l.Random(),l.Random(),korisnik.Lokacija.Adresa), "", "", -1, null, StatusVoznje.Kreirana);
 
             foreach (Musterija musterija in ListaMusterija.Musterije)
             {

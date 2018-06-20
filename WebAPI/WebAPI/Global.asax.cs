@@ -19,11 +19,14 @@ namespace WebAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            ListaMusterija.Musterije = new List<Musterija>();
+            ListaVozaca.Vozaci = new List<Vozac>();
+            ListaDispecera.Dispeceri = new List<Dispecer>();
             ListaAutomobila.Create();
             ListaVozaca.Vozaci.Add(new Vozac("vozac","aaaaa","Ivan","Benis",PolEnum.Muski,"2004996800115","0","a@a.a",UlogaEnum.Vozac,null, new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000"),ListaAutomobila.Vozila[3]));
+            ListaMusterija.Musterije.Add(new Musterija("Dasa", "aaaaa", "Ivan", "Benis", PolEnum.Muski, "2004996800115", "0", "a@a.a", UlogaEnum.Musterija, null));
+
             Voznje.CreateVoznje();
-            ListaMusterija.Musterije = new List<Musterija>();
             string text = System.IO.File.ReadAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\dispeceri.txt");
             string[] line = text.Split('=',';');
             int count = line.Count()/18;

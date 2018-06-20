@@ -59,9 +59,13 @@
             });
             $("#Voznje").click(function () {
                 $.get("/api/voznjeKorisnika", function (data, status) {
-                    for (i = 0; i < data.Count(); i++) {
-                        $("div[name = 'proba']").val(data[i].Lokacija.Adresa);
+                    var i;
+                    for (i = 0; i < data.length; i++) {                        
+                        var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var txt3 = $("<td></td>").text(data[i].Datum);
+                        $("#tabela").append("<tr>",txt2,txt3,"</tr>");
                     }
+                   
                 });
             });
         });
@@ -168,21 +172,16 @@
 
 
     <div id="Voznje na cekanju" class="tabcontent">
-        <table border="1">
-            <tr>
-                <th>Unesite lokaciju:</th>
-                <td><input type="text" name="Lokacija.adresa"><input type="hidden" name="korisnickoIme3" id="korisnickoIme3"></td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="proba">
-                    </div>
-                <td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="Naruci"></td>
-            </tr>
-        </table>
+            <table border="1" id="tabela">
+                <tr>
+                    <th>
+                        Lokacija
+                    </th>
+                    <th>
+                        Vreme porucivalja
+                    </th>
+                </tr>
+            </table>
     </div>
 </body>
 </html>

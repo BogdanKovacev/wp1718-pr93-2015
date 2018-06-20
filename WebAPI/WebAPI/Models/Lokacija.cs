@@ -18,9 +18,12 @@ namespace WebAPI.Models
             this.Adresa = adresa;
         }
 
-        public Lokacija()
-        {
+        public Lokacija() { }
 
+        public string Random()
+        {
+            Random r = new Random();
+            return string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130));
         }
         
     }
