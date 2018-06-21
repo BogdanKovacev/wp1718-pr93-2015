@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult Post(TempLokacija korisnik)
         {
-            string temp = korisnik.KorisnickoImeVozaca;
+            /*string temp = korisnik.KorisnickoImeVozaca;
 
             Voznja tempVoznja = null;
             List<Voznja> lista = new List<Voznja>();
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
                         }
                     }
                 }
-            }
+            }*/
 
             
 

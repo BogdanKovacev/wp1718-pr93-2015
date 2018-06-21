@@ -9,11 +9,11 @@ namespace WebAPI.Models
     {
         public string Opis { get; set; }
         public DateTime DatumObjave { get; set; }
-        public Korisnik Korisnik { get; set; }
-        public Voznja Voznja { get; set; }
+        public string Korisnik { get; set; }
+        public DateTime Voznja { get; set; }
         public int OcenaVoznje { get; set; }
 
-        public Komentar(string opis, DateTime datumObjave, Korisnik korisnik, Voznja voznja, int ocenaVoznje)
+        public Komentar(string opis, DateTime datumObjave, string korisnik, DateTime voznja, int ocenaVoznje)
         {
             this.Opis = opis;
             this.DatumObjave = datumObjave;

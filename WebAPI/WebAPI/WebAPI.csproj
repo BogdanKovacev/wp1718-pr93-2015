@@ -169,9 +169,12 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DispecerController.cs" />
     <Compile Include="Controllers\DispecerDodajVozacaController.cs" />
+    <Compile Include="Controllers\DispecerLicneVoznjeController.cs" />
+    <Compile Include="Controllers\DispecerVoznjaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmenaController.cs" />
     <Compile Include="Controllers\IzmenaVoznjeController.cs" />
+    <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\LogginController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\MusterijaZahtevController.cs" />
@@ -200,6 +203,7 @@
     <Compile Include="Models\StatusVoznje.cs" />
     <Compile Include="Models\Temp.cs" />
     <Compile Include="Models\TempLokacija.cs" />
+    <Compile Include="Models\TempVoznja.cs" />
     <Compile Include="Models\TipVozilaEnum.cs" />
     <Compile Include="Models\Uloga.cs" />
     <Compile Include="Models\Vozac.cs" />

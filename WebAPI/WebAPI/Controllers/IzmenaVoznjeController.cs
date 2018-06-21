@@ -32,6 +32,8 @@ namespace WebAPI.Controllers
 
             tempVoznja = lista[index];
 
+            Temp.M.VoznjeKorisnika.Remove(tempVoznja);            
+
             return tempVoznja;
         }
     }

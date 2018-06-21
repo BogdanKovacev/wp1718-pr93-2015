@@ -46,7 +46,5 @@ E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPage
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPages.Deployment.xml
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPages.Razor.xml
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Antlr3.Runtime.pdb
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.pdb
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.csprojResolveAssemblyReference.cache

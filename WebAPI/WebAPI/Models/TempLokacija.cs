@@ -9,5 +9,6 @@ namespace WebAPI.Models
     {
         public string Lokacija2 { get; set; }
         public string KorisnickoImeVozaca { get; set; }
+        public string Ocena { get; set; }
     }
 }

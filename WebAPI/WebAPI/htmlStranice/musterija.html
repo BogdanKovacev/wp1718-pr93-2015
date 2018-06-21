@@ -36,15 +36,29 @@
         {
             var a = i
 
-            alert("POM1");
-                $.ajax({
-                    url: 'api/izmena/post',
-                    method: 'POST',
-                    data: {
-                        KorisnickoImeVozaca: i
-                    }
-                });
-            document.getElementById("Voznje").click();
+            $("#tabelaKomentar").show();
+            var ret = $("#opis1").val();
+            var s5 = $("<input type=\"submit\" value=\"Komentarisi\" onclick=\"kom(ret)\">").attr("id", "komentar_" + i);
+            var s6 = $("<input type=\"submit\" value=\"Komentarisi\" onclick=\"kom(" + i + ")\">").attr("id", "izmeni_" + i);
+            $("#tdKomentar").append(s6);
+
+        }
+
+        function kom(i)
+        {
+            alert($("#opis1").val());
+            alert($("#ocenaVoznje1").val());
+            $.ajax({
+                url: 'api/komentar/post',
+                method: 'POST',
+                data: {
+                    KorisnickoImeVozaca: $("#opis1").val(),
+                    Lokacija2: i,
+                    Ocena: $("#ocenaVoznje1").val()
+                }
+            });
+            $("#tabelaKomentar").hide();
+
         }
 
         function pom2(i) {
@@ -61,19 +75,17 @@
                     alert("success2");
                     document.getElementById("tab2").click();
                     $("#lokacijaZahtev").val(data.Odrediste.Adresa);
-                    if (data.TipAutomobila == 0) {
+                    if (data.TipVozila == 0) {
                         $("#PutnickiZahtev").attr("selected", "true");
                     }
-                    else if (data.TipAutomobila == 1) {
+                    else if (data.TipVozila == 1) {
                         $("#KombiZahtev").attr("selected", "true");
                     }
-                    else if (data.TipAutomobila == 2) {
+                    else if (data.TipVozila == 2) {
                         $("#PodrazumevaniZahtev").attr("selected", "true");
                     }
                 }             
             });
-            
-
         }
 
 
@@ -103,6 +115,7 @@
                 });
             });
             $("#Voznje").click(function () {
+                $("#tabelaKomentar").hide();
                 $("#tabela").empty();
                 var s1 = $("<th></th>").text("Lokacija");
                 var s2 = $("<th></th>").text("Vreme porucivalja");
@@ -117,10 +130,12 @@
                         var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
                         var txt3 = $("<td></td>").text(data[i].Datum);
                         var txt7 = $("<td></td>").text(i);
+                        korisnik = data[i].Musterija;
+                        $("#korisnikKomentar").val(korisnik);
                         var txt4 = $("<input type=\"submit\" value=\"izmeni\" onclick=\"pom2(" + i + ")\">").attr("id", "izmeni_" + i);
                         var txt5 = $("<input type=\"submit\" value=\"obrisi\" onclick=\"pom(" + i + ")\">").attr("id", "obrisi_" + i);
                         $("#tabela").append("<tr>", txt2, txt3, txt4, txt5,txt7, "</tr>");
-                        korisnik = data[i].Musterija;
+                        
                         iz = i;
                         o = i;                        
                     }
@@ -233,6 +248,39 @@
     <div id="Voznje na cekanju" class="tabcontent">
             <table border="1" id="tabela">
                 
+            </table>
+
+            <table border="1" id="tabelaKomentar">
+                <tr>
+                    <th>Ocena</th>
+                    <td>
+                        <select id="ocenaVoznje1" name="ocenaVoznje">
+                            <option value="Nula">0</option>
+                            <option value="Jedan">1</option>
+                            <option value="Dva">2</option>
+                            <option value="Tri">3</option>
+                            <option value="Cetiri">4</option>
+                            <option value="Pet">5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Opis</th>
+                    <td>
+                        <input type="text" id="opis1" name="opis">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Korisnik</th>
+                    <td>
+                        <input readonly type="text" name="korisnikKomentar" id="korisnikKomentar">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" id="tdKomentar">
+                        
+                    </td>
+                </tr>
             </table>
     </div>
 </body>

@@ -28,6 +28,21 @@
             elmnt.style.backgroundColor = color;
         }
 
+        function formiraj() {
+            alert($("#lokacijaVoznje").val());
+
+            $.ajax({
+                url: 'api/dispecerVoznja/post',
+                method: 'POST',
+                data: {
+                    LokacijaTaksija: $("#lokacijaVoznje").val(),
+                    Vozac: $("#vozacSelect").val(),
+                    TipVozila: $("#tipAutomobila").val()
+                }
+            });
+
+        }
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -50,6 +65,84 @@
                     $("#voznje").val(data.VoznjeKorisnika);
                 });
             });
+            $("#FormirajVoznjuTab").click(function () {
+                $.get("/api/dispecerVoznja", function (data, status) {
+                    $("#vozacSelect").empty();
+                    var i;
+                    for(i = 0; i < data.length;i++)
+                    {
+                        var s = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").attr("id", data[i].KorisnickoIme);
+                        $("#vozacSelect").append(s);
+                    }
+                });
+            });
+            $("#pocetna").click(function () {
+                $("#tabelaPocetna").empty();
+                var t1 = $("<td></td>").text("Lokacija");
+                var t2 = $("<td></td>").text("Vreme zahteva");
+                var t3 = $("<td></td>").text("Tip vozila");
+                var t4 = $("<td></td>").text("Musterija");
+                var t5 = $("<td></td>").text("Vozac");
+                var t6 = $("<td></td>").text("Iznos");
+                var t7 = $("<td></td>").text("Stanje voznje");
+                var t8 = $("<td></td>").text("Komentar");
+                var t9 = $("<td></td>").text("Datum Komentara");
+                var t10 = $("<td></td>").text("Ocena");
+                $("#tabelaPocetna").append("<tr>",t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,"</tr>");
+
+                $.get("/api/dispecerLicneVoznje", function (data, status) {
+                    var i;
+                    var tip;
+                    var tipVoznje;
+                    for (i = 0; i < data.length; i++) {
+                        var s1 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var s2 = $("<td></td>").text(data[i].Datum);
+                        if (data[i].TipVozila == 0) {
+                            tip = "Putnicki";
+                        }
+                        else if (data[i].TipVozila == 1) {
+                            tip = "Kombi";
+                        }
+                        else if (data[i].TipVozila == 2) {
+                            tip = "Podrazumevani";
+                        }
+                        var s3 = $("<td></td>").text(tip);
+                        var s4 = $("<td></td>").text(data[i].Musterija);
+                        var s5 = $("<td></td>").text(data[i].Vozac);
+                        var s6 = $("<td></td>").text(data[i].Iznos);
+                        if (data[i].StatusVoznje == 0) {
+                            tipVoznje = "Kreirana";
+                        }
+                        else if (data[i].StatusVoznje == 1) {
+                            tipVoznje = "Otkazana";
+                        }
+                        else if (data[i].StatusVoznje == 2) {
+                            tipVoznje = "Formirana";
+                        }
+                        else if (data[i].StatusVoznje == 3) {
+                            tipVoznje = "Odradjena";
+                        }
+                        else if (data[i].StatusVoznje == 4) {
+                            tipVoznje = "Prihvacena";
+                        }
+                        else if (data[i].StatusVoznje == 5) {
+                            tipVoznje = "Neuspesna";
+                        }
+                        else if (data[i].StatusVoznje == 6) {
+                            tipVoznje = "Uspesna";
+                        }
+                        var s7 = $("<td></td>").text(tipVoznje);
+                        var s8 = $("<td></td>").text(data[i].Komentar.Opis);
+                        var s9 = $("<td></td>").text(data[i].Komentar.DatumObjave);
+                        var s10 = $("<td></td>").text(data[i].Komentar.OcenaVoznje);
+
+                        $("#tabelaPocetna").append("<tr>", s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,"</tr>");
+                    }
+                });
+                $.get("/api/dispecerSveVoznje", function (data, status) {
+                    //
+                });
+            });
         });
     </script>
 </head>
@@ -59,7 +152,7 @@
 
     <button class="tablink" id="pocetna" onclick="openPage('Pocetna', this)">Pocetna</button>
     <button class="tablink" id="Myprofile" onclick="openPage('My Profile', this)">My Profile</button>
-    <button class="tablink" onclick="openPage('Formiraj voznju', this)">Formiraj voznju</button>
+    <button class="tablink" id="FormirajVoznjuTab" onclick="openPage('Formiraj voznju', this)">Formiraj voznju</button>
     <button class="tablink" onclick="openPage('Obradi voznju', this)">Obradi voznju</button>
     <button class="tablink" onclick="openPage('Napravi vozaca', this)">Napravi vozaca</button>
 
@@ -193,14 +286,51 @@
     </div>
 
     <div id="Pocetna" class="tabcontent">
-        Voznje: <input type="text" name="voznje" id="promeniDispecera">
+        <h1>                                    SVE VASE VOZNJE</h1>
+        <table id="tabelaPocetna" border="1">
+            
+        </table>
     </div>
 
     <div id="Formiraj voznju" class="tabcontent">
-        Unesite lokaciju: <input type="text" name="lokacija">
-        Vozilo: <input type="text" name="vozilo">
-        <input type="submit" value="Formiraj">
+        <table border="1">
+            <tr>
+                <th>
+                    Lokacija
+                </th>
+                <td>
+                    <input type="text" name="lokacija" id="lokacijaVoznje">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Vozilo
+                </th>
+                <td>
+                    <select id="tipAutomobila" name="Automobil.tipAutomobila">
+                        <option value="Podrazumevani" id="PodrazumevaniZahtev">Podrazumevani</option>
+                        <option value="Putnicki" id="PutnickiZahtev">Putnicki</option>
+                        <option value="Kombi" id="KombiZahtev">Kombi</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Vozac
+                </th>
+                <td>
+                    <select id="vozacSelect" name="Vozac">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="submit" id="dugme" onclick="formiraj()">
+                </td>
+            </tr>
+        </table>
     </div>
+
     <div id="Obradi voznju" class="tabcontent">
         Dodeli vozacu: <input type="text" name="lokacija">
         <input type="submit" value="Dodeli">
