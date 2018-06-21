@@ -1,3 +1,4 @@
+E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\roslyn\csc.exe
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -14,6 +15,8 @@ E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\WebAPI.dll.config
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\WebAPI.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\WebAPI.pdb
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Antlr3.Runtime.dll
+E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.dll
+E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.SqlServer.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Microsoft.Web.Infrastructure.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Newtonsoft.Json.dll
@@ -28,6 +31,8 @@ E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPage
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPages.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPages.Razor.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\WebGrease.dll
+E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.xml
+E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.SqlServer.xml
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Newtonsoft.Json.xml
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Net.Http.Formatting.xml
@@ -43,10 +48,5 @@ E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\System.Web.WebPage
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\Antlr3.Runtime.pdb
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.dll
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.pdb
 E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\obj\Debug\WebAPI.csprojResolveAssemblyReference.cache
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.dll
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.SqlServer.dll
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.xml
-E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\bin\EntityFramework.SqlServer.xml

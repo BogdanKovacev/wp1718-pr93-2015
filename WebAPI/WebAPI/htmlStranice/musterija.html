@@ -36,7 +36,7 @@
         {
             var a = i
 
-            alert(a);
+            alert("POM1");
                 $.ajax({
                     url: 'api/izmena/post',
                     method: 'POST',
@@ -50,14 +50,29 @@
         function pom2(i) {
             var a = i
 
-            alert(a);
+            alert("POM2");
             $.ajax({
                 url: 'api/izmenaVoznje/post',
                 method: 'POST',
                 data: {
                     KorisnickoImeVozaca: i
-                }
+                },
+                success: function (data) {
+                    alert("success2");
+                    document.getElementById("tab2").click();
+                    $("#lokacijaZahtev").val(data.Odrediste.Adresa);
+                    if (data.TipAutomobila == 0) {
+                        $("#PutnickiZahtev").attr("selected", "true");
+                    }
+                    else if (data.TipAutomobila == 1) {
+                        $("#KombiZahtev").attr("selected", "true");
+                    }
+                    else if (data.TipAutomobila == 2) {
+                        $("#PodrazumevaniZahtev").attr("selected", "true");
+                    }
+                }             
             });
+            
 
         }
 
@@ -107,31 +122,7 @@
                         $("#tabela").append("<tr>", txt2, txt3, txt4, txt5,txt7, "</tr>");
                         korisnik = data[i].Musterija;
                         iz = i;
-                        o = i;
-                        /*$("#izmeni_" + i).click(function (i) {
-                            alert("udje ti" + i);
-                            $.ajax({
-                                url: 'api/izmena/post',
-                                method: 'POST',
-                                data: {
-                                    KorisnickoImeVozaca: i,
-                                    Lokacija2: korisnik
-                                }
-                            });
-                            
-                            document.getElementById("Voznje").click();
-                        });*/
-                       /*$("#obrisi_" + i).click(function () {
-                            $.ajax({
-                                url: 'api/izmena/post',
-                                method: 'POST',
-                                data: {
-                                    KorisnickoImeVozaca: i,
-                                    Lokacija2: korisnik
-                                }
-                            });
-                            document.getElementById("Voznje").click();
-                        });*/
+                        o = i;                        
                     }
 
                 });
@@ -216,15 +207,15 @@
             <table border="1">
                 <tr>
                     <th>Unesite lokaciju:</th>
-                    <td><input type="text" name="Lokacija.adresa"><input type="hidden" name="korisnickoIme3" id="korisnickoIme3"></td>
+                    <td><input type="text" id="lokacijaZahtev" name="Lokacija.adresa"><input type="hidden" name="korisnickoIme3" id="korisnickoIme3"></td>
                 </tr>
                 <tr>
                     <th>Vozilo:</th>
                     <td>
-                        <select id="tipAutomobila" name="Automobil.tipAutomobila">
-                            <option value="Podrazumevani" id="Podrazumevani">Podrazumevani</option>
-                            <option value="Putnicki" id="Putnicki">Putnicki</option>
-                            <option value="Kombi" id="Kombi">Kombi</option>
+                        <select id="tipAutomobilaZahtev" name="Automobil.tipAutomobila">
+                            <option value="Podrazumevani" id="PodrazumevaniZahtev">Podrazumevani</option>
+                            <option value="Putnicki" id="PutnickiZahtev">Putnicki</option>
+                            <option value="Kombi" id="KombiZahtev">Kombi</option>
                         </select>
                     </td>
                 </tr>

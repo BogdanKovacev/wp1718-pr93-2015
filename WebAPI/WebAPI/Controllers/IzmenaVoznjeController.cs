@@ -11,8 +11,8 @@ namespace WebAPI.Controllers
 {
     public class IzmenaVoznjeController : ApiController
     {
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Post(TempLokacija korisnik)
+
+        public Voznja Post(TempLokacija korisnik)
         {
             string temp = korisnik.KorisnickoImeVozaca;
 
@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
 
 
             int index = Int32.Parse(temp);
-            
+
             foreach (Voznja voz in Temp.M.VoznjeKorisnika)
             {
                 if (voz.StatusVoznje.Equals(StatusVoznje.Kreirana))
@@ -32,25 +32,7 @@ namespace WebAPI.Controllers
 
             tempVoznja = lista[index];
 
-            foreach (Voznja voz in Temp.M.VoznjeKorisnika)
-            {
-                if (tempVoznja.Datum.Equals(voz.Datum))
-                {
-                    voz.StatusVoznje = StatusVoznje.Otkazana;
-                    foreach (Voznja voz1 in Voznje.SveVoznje)
-                    {
-                        if (tempVoznja.Datum.Equals(voz1.Datum))
-                        {
-                            voz1.StatusVoznje = StatusVoznje.Otkazana;
-                        }
-                    }
-                }
-            }
-
-
-
-            return StatusCode(HttpStatusCode.NoContent);
-
+            return tempVoznja;
         }
     }
 }
