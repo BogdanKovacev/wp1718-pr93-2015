@@ -170,25 +170,32 @@
     <Compile Include="Controllers\DispecerController.cs" />
     <Compile Include="Controllers\DispecerDodajVozacaController.cs" />
     <Compile Include="Controllers\DispecerLicneVoznjeController.cs" />
+    <Compile Include="Controllers\DispecerObradaVoznjeController.cs" />
     <Compile Include="Controllers\DispecerVoznjaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmenaController.cs" />
     <Compile Include="Controllers\IzmenaVoznjeController.cs" />
     <Compile Include="Controllers\KomentarController.cs" />
+    <Compile Include="Controllers\KomentarVozacController.cs" />
     <Compile Include="Controllers\LogginController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\MusterijaZahtevController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\TrenutnaVoznjaController.cs" />
+    <Compile Include="Controllers\UnosOdredistaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
+    <Compile Include="Controllers\VozaciController.cs" />
     <Compile Include="Controllers\VozacLokacijaController.cs" />
+    <Compile Include="Controllers\VoznjeDispecerController.cs" />
     <Compile Include="Controllers\VoznjeKorisnikaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Automobil.cs" />
     <Compile Include="Models\Dispecer.cs" />
+    <Compile Include="Models\FormirajVoznju.cs" />
     <Compile Include="Models\Komentar.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\ListaAutomobila.cs" />
@@ -219,6 +226,8 @@
     <Content Include="htmlStranice\error.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="htmlStranice\HtmlKomentarVozac.html" />
+    <Content Include="htmlStranice\HtmlUnosOdredista.html" />
     <Content Include="htmlStranice\login.html" />
     <Content Include="htmlStranice\musterija.html" />
     <Content Include="pocetniHTML.html" />

@@ -20,7 +20,7 @@ namespace WebAPI.Models
 
         public Korisnik()
         {
-
+            VoznjeKorisnika = new List<Voznja>();
         }
 
         public Korisnik(string korisnickoIme, string lozinka, string ime, string prezime, PolEnum pol, string jmbg, string kontaktTelefon, string email, UlogaEnum uloga, List<Voznja> voznjeKorisnika)

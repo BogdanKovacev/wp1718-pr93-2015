@@ -14,6 +14,14 @@ function startVozac() {
     $("div#pocetnaDiv").load("./htmlStranice/vozac.html");
 }
 
+function loadKomentarVozac() {
+    $("div#pocetnaDiv").load("./htmlStranice/HtmlKomentarVozac.html");
+}
+
+function loadUnosOdredista() {
+    $("div#pocetnaDiv").load("./htmlStranice/HtmlUnosOdredista.html");
+}
+
 function doRegistrationSubmit() {
     $.post('/api/loggin/', $('form#regForm').serialize())
         .done(function (status, data, xhr) {

@@ -1,0 +1,63 @@
+﻿<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<script src="Scripts/jquery-1.10.2.js"></script>
+	<script src="Scripts/jquery.validate.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			$.get("/api/vozac", function (data, status)
+			{
+			    $("#korisnickoIme").val(data.KorisnickoIme);
+			});
+		});
+
+		function posalji()
+		{
+			$.ajax({
+				url: 'api/komentarVozac/post',
+				method: 'POST',
+				data: {
+				    LokacijaTaksija: $("#opis1").val(),
+				    TipVozila: $("#ocenaVoznje1").val(),
+				    Vozac: $("#korisnickoIme").val(),
+				},
+				success: function ()
+				{
+				    startVozac();
+				},
+			});
+		}
+
+	</script>
+</head>
+<body>
+	<input type="hidden" id="global">
+	<table>
+		<tr>
+			<th>Opis: </th>
+			<td><textarea id="opis1" name="opis"></textarea></td>
+		</tr>
+		<tr>
+			<th>Korisnicko ime: </th>
+			<td><input readonly type="text" name="Korisnik" id="korisnickoIme"></td>
+		</tr>
+		<tr>
+			<th>Ocena: </th>
+			<td>
+				<select id="ocenaVoznje1" name="OcenaVoznje">
+					<option value="Nula">0</option>
+					<option value="Jedan">1</option>
+					<option value="Dva">2</option>
+					<option value="Tri">3</option>
+					<option value="Cetiri">4</option>
+					<option value="Pet">5</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right"><input type="submit" value="Posalji" onclick="posalji()"></td>
+		</tr>
+	</table>
+</body>

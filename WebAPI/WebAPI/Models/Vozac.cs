@@ -22,7 +22,8 @@ namespace WebAPI.Models
         {
             Lokacija = new Lokacija();
             Automobil = new Automobil();
+            VoznjeKorisnika = new List<Voznja>();
         }
-        
+
     }
 }

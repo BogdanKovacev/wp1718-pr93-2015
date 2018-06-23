@@ -11,5 +11,13 @@ namespace WebAPI.Models
         public static Musterija M { get; set; }
         public static Vozac V { get; set; }
         public static Dispecer D { get; set; }
+
+        public Temp()
+        {
+            K = new Korisnik();
+            M = new Musterija();
+            D = new Dispecer();
+            V = new Vozac();
+        }
     }
 }

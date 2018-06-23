@@ -43,6 +43,28 @@
 
         }
 
+        function obradi() {
+            $.get("/api/dispecerObradaVoznje", function (data, status) {
+                var i;
+
+                for (i = 0; i < data.length; i++) {
+                    if ($("#check" + i).prop('checked')) {
+                        $.ajax({
+                            url: 'api/voznjeDispecer/post',
+                            method: 'POST',
+                            data: {
+                                Adresa: data[i].LokacijaTaksija.Adresa,
+                                Vozac: document.getElementById("obradiVoznjuVozac").value,
+                            },
+                            success: function (data) {
+                                startDispecer();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -143,6 +165,31 @@
                     //
                 });
             });
+            $("#obradi").click(function () {
+                $("#obradiVoznjuTabela").empty();
+                $("#obradiVoznjuTabela").append("<tr><th colspan=\"3\" align=\"center\">Voznje na cekanju</th></tr>");
+                $("#obradiVoznjuTabela").append("<tr><th>Ulica</th><th>Broj</th><th></th></tr>");
+
+
+                $.get("/api/dispecerObradaVoznje", function (data, status) {
+                    var i;
+
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaTaksija.Adresa + "\" id=\"ulica" + i + "\"></td>").text(data[i].LokacijaTaksija.Adresa);
+                        var txt3 = $("<td><input type=\"radio\" name=\"radioButton\"id=\"check" + i + "\"></td>");
+                        $("#obradiVoznjuTabela").append("<tr>", txt1, txt3, "</tr>");
+                    }
+                });
+
+                $.get("/api/vozaci", function (data, status) {
+                    var i;
+
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
+                        $("#obradiVoznjuVozac").append(txt1);
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -153,7 +200,7 @@
     <button class="tablink" id="pocetna" onclick="openPage('Pocetna', this)">Pocetna</button>
     <button class="tablink" id="Myprofile" onclick="openPage('My Profile', this)">My Profile</button>
     <button class="tablink" id="FormirajVoznjuTab" onclick="openPage('Formiraj voznju', this)">Formiraj voznju</button>
-    <button class="tablink" onclick="openPage('Obradi voznju', this)">Obradi voznju</button>
+    <button class="tablink" id="obradi" onclick="openPage('Obradi voznju', this)">Obradi voznju</button>
     <button class="tablink" onclick="openPage('Napravi vozaca', this)">Napravi vozaca</button>
 
     <div id="Napravi vozaca" class="tabcontent">
@@ -332,8 +379,9 @@
     </div>
 
     <div id="Obradi voznju" class="tabcontent">
-        Dodeli vozacu: <input type="text" name="lokacija">
-        <input type="submit" value="Dodeli">
+        <table id="obradiVoznjuTabela" border="1"></table>
+        <select id="obradiVoznjuVozac"></select>
+        <input type="submit" value="Obradi" onclick="obradi()">
     </div>
 </body>
 </html>

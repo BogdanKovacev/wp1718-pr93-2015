@@ -52,6 +52,14 @@ namespace WebAPI.Controllers
 
             Voznje.SveVoznje.Add(voz);
 
+            foreach (Vozac v in ListaVozaca.Vozaci)
+            {
+                if (v.KorisnickoIme.Equals(voznja.Vozac))
+                {
+                    v.VoznjeKorisnika.Add(voz);
+                }
+            }
+
             return StatusCode(HttpStatusCode.NoContent);
         }
 

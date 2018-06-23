@@ -26,11 +26,11 @@ namespace WebAPI
             ListaVozaca.Vozaci.Add(new Vozac("vozac1","aaaaa","Ivan","Benis",PolEnum.Muski,"2004996800115","0","a@a.a",UlogaEnum.Vozac,null, new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000"),ListaAutomobila.Vozila[3]));
             ListaVozaca.Vozaci.Add(new Vozac("vozac2", "aaaaa", "Ivan", "Benis", PolEnum.Muski, "2004996800115", "0", "a@a.a", UlogaEnum.Vozac, null, new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000"), ListaAutomobila.Vozila[3]));
             ListaVozaca.Vozaci.Add(new Vozac("vozac3", "aaaaa", "Ivan", "Benis", PolEnum.Muski, "2004996800115", "0", "a@a.a", UlogaEnum.Vozac, null, new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000"), ListaAutomobila.Vozila[3]));
-
+            Temp t = new Temp();
             ListaMusterija.Musterije.Add(new Musterija("Dasa", "aaaaa", "Ivan", "Benis", PolEnum.Muski, "2004996800115", "0", "a@a.a", UlogaEnum.Musterija, null));
 
             Voznje.CreateVoznje();
-            string text = System.IO.File.ReadAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\dispeceri.txt");
+            string text = System.IO.File.ReadAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015-master\WebAPI\WebAPI\dispeceri.txt");
             string[] line = text.Split('=',';');
             int count = line.Count()/18;
             for(int i = 0; i < count ; i++)
