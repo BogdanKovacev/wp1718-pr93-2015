@@ -8,21 +8,17 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class SveVoznjeMusterijaController : ApiController
+    public class SortiranjeDatumaController : ApiController
     {
         public List<Voznja> Get()
         {
             List<Voznja> ret = new List<Voznja>();
+            ret = Voznje.SveVoznje;
 
-            foreach (Voznja voznja in Voznje.SveVoznje)
+            foreach (Voznja voznja in ret)
             {
-                if (voznja.Musterija.Equals(Temp.M.KorisnickoIme))
-                {
-                    ret.Add(voznja);
-                }
+                ret.Sort((x, y) => DateTime.Compare(y.Datum, x.Datum));
             }
-
-            Voznje.ListaSortiranih = ret;
 
             return ret;
         }

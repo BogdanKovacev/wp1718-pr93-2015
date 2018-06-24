@@ -8,21 +8,17 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class SveVoznjeMusterijaController : ApiController
+    public class FiltriranjeController : ApiController
     {
-        public List<Voznja> Get()
+        public List<Voznja> Post(FormirajVoznju forma)
         {
             List<Voznja> ret = new List<Voznja>();
 
             foreach (Voznja voznja in Voznje.SveVoznje)
             {
-                if (voznja.Musterija.Equals(Temp.M.KorisnickoIme))
-                {
+                if (voznja.StatusVoznje.Equals(forma.StatusVoznje))
                     ret.Add(voznja);
-                }
             }
-
-            Voznje.ListaSortiranih = ret;
 
             return ret;
         }

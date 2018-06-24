@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
                     return Ok(musterija);
                 }
             }
-
+            
             return BadRequest("GRESKA");
         }
 

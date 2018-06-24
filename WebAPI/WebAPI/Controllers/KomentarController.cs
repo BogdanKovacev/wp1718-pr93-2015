@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             {
                 ocenaTemp = 3;
             }
-            else if (komentar.Ocena.Equals("Cetri"))
+            else if (komentar.Ocena.Equals("Cetiri"))
             {
                 ocenaTemp = 4;
             }
@@ -50,7 +50,15 @@ namespace WebAPI.Controllers
                     temp.Add(voznja);
                 }
             }
-            retKom.Voznja = temp[index].Datum;
+
+            if(temp.Count == 1)
+            {
+                retKom.Voznja = temp[0].Datum;
+            }
+            else
+            {
+                retKom.Voznja = temp[index].Datum;
+            }
 
             Voznje.SveVoznje.Remove(temp[index]);
             Temp.M.VoznjeKorisnika.Remove(temp[index]);

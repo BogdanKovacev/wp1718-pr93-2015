@@ -173,6 +173,7 @@
     <Compile Include="Controllers\DispecerObradaVoznjeController.cs" />
     <Compile Include="Controllers\DispecerSveVoznjeController.cs" />
     <Compile Include="Controllers\DispecerVoznjaController.cs" />
+    <Compile Include="Controllers\FiltriranjeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmenaController.cs" />
     <Compile Include="Controllers\IzmenaVoznjeController.cs" />
@@ -181,8 +182,13 @@
     <Compile Include="Controllers\LogginController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\MusterijaZahtevController.cs" />
+    <Compile Include="Controllers\PretragaCenaController.cs" />
+    <Compile Include="Controllers\PretragaDatumController.cs" />
+    <Compile Include="Controllers\PretragaOcenaController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SortiranjeDatumaController.cs" />
+    <Compile Include="Controllers\SortiranjeOcenaController.cs" />
     <Compile Include="Controllers\SveVoznjeMusterijaController.cs" />
     <Compile Include="Controllers\SveVoznjeVozacaController.cs" />
     <Compile Include="Controllers\TrenutnaVoznjaController.cs" />
