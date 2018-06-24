@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         {
             List<Voznja> ret = new List<Voznja>();
 
-            foreach (Voznja voznja in Voznje.SveVoznje)
+            foreach (Voznja voznja in Voznje.ListaSortiranih)
             {
                 if (voznja.StatusVoznje.Equals(forma.StatusVoznje))
                     ret.Add(voznja);

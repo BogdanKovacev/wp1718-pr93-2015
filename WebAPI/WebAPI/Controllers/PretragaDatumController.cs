@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
 
             if (temp.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
                     if (voznja.Datum >= datum.Od)
                         ret.Add(voznja);
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
             }
             else if (temp.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
                     if (voznja.Datum <= datum.Do)
                         ret.Add(voznja);
@@ -55,12 +55,14 @@ namespace WebAPI.Controllers
             }
             else if (temp.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
                     if (voznja.Datum >= datum.Od && voznja.Datum <= datum.Do)
                         ret.Add(voznja);
                 }
             }
+
+            Voznje.ListaSortiranih = ret;
 
             return ret;
         }

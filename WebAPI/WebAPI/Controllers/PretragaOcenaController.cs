@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
 
             if (pom.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
                     if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena))
                         ret.Add(voznja);
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             }
             else if (pom.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
                     if ((int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
                         ret.Add(voznja);
@@ -54,12 +54,14 @@ namespace WebAPI.Controllers
             }
             else if (pom.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.SveVoznje)
+                foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
                     if ((int)voznja.Komentar.OcenaVoznje >= int.Parse(temp.OdOcena) && (int)voznja.Komentar.OcenaVoznje <= int.Parse(temp.DoOcena))
                         ret.Add(voznja);
                 }
             }
+
+            Voznje.ListaSortiranih = ret;
 
             return ret;
         }

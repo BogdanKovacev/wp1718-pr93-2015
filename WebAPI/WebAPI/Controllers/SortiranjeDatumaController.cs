@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
         public List<Voznja> Get()
         {
             List<Voznja> ret = new List<Voznja>();
-            ret = Voznje.SveVoznje;
+            ret = Voznje.ListaSortiranih;
 
             foreach (Voznja voznja in ret)
             {
