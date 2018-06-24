@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
                 tipVozila = TipVozilaEnum.Podrazumevani;
             }
 
-            Voznja voz = new Voznja(DateTime.Now,tempVozac.Lokacija,tipVozila, "",odrediste,Temp.D.KorisnickoIme,voznja.Vozac,0,null,StatusVoznje.Formirana);
+            Voznja voz = new Voznja(DateTime.Now,odrediste,tipVozila, "",odrediste,Temp.D.KorisnickoIme,voznja.Vozac,0,new Komentar(),StatusVoznje.Formirana);
 
             Voznje.SveVoznje.Add(voz);
 

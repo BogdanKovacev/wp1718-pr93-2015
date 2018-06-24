@@ -68,6 +68,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+            jQuery('#Myprofile').click();
             $("#Myprofile").click(function () {
                 $.get("/api/dispecer", function (data, status) {
                     $("#korisnickoIme").val(data.KorisnickoIme);
@@ -161,8 +162,66 @@
                         $("#tabelaPocetna").append("<tr>", s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,"</tr>");
                     }
                 });
+                $("#tabelaPocetna2").empty();
+                var t1 = $("<td></td>").text("Lokacija");
+                var t2 = $("<td></td>").text("Vreme zahteva");
+                var t3 = $("<td></td>").text("Tip vozila");
+                var t4 = $("<td></td>").text("Musterija");
+                var t5 = $("<td></td>").text("Vozac");
+                var t6 = $("<td></td>").text("Iznos");
+                var t7 = $("<td></td>").text("Stanje voznje");
+                var t8 = $("<td></td>").text("Komentar");
+                var t9 = $("<td></td>").text("Datum Komentara");
+                var t10 = $("<td></td>").text("Ocena");
+                $("#tabelaPocetna2").append("<tr>", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, "</tr>");
                 $.get("/api/dispecerSveVoznje", function (data, status) {
-                    //
+                    var i;
+                    var tip;
+                    var tipVoznje;
+                    for (i = 0; i < data.length; i++) {
+                        var s1 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var s2 = $("<td></td>").text(data[i].Datum);
+                        if (data[i].TipVozila == 0) {
+                            tip = "Putnicki";
+                        }
+                        else if (data[i].TipVozila == 1) {
+                            tip = "Kombi";
+                        }
+                        else if (data[i].TipVozila == 2) {
+                            tip = "Podrazumevani";
+                        }
+                        var s3 = $("<td></td>").text(tip);
+                        var s4 = $("<td></td>").text(data[i].Musterija);
+                        var s5 = $("<td></td>").text(data[i].Vozac);
+                        var s6 = $("<td></td>").text(data[i].Iznos);
+                        if (data[i].StatusVoznje == 0) {
+                            tipVoznje = "Kreirana";
+                        }
+                        else if (data[i].StatusVoznje == 1) {
+                            tipVoznje = "Otkazana";
+                        }
+                        else if (data[i].StatusVoznje == 2) {
+                            tipVoznje = "Formirana";
+                        }
+                        else if (data[i].StatusVoznje == 3) {
+                            tipVoznje = "Odradjena";
+                        }
+                        else if (data[i].StatusVoznje == 4) {
+                            tipVoznje = "Prihvacena";
+                        }
+                        else if (data[i].StatusVoznje == 5) {
+                            tipVoznje = "Neuspesna";
+                        }
+                        else if (data[i].StatusVoznje == 6) {
+                            tipVoznje = "Uspesna";
+                        }
+                        var s7 = $("<td></td>").text(tipVoznje);
+                        var s8 = $("<td></td>").text(data[i].Komentar.Opis);
+                        var s9 = $("<td></td>").text(data[i].Komentar.DatumObjave);
+                        var s10 = $("<td></td>").text(data[i].Komentar.OcenaVoznje);
+
+                        $("#tabelaPocetna2").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, "</tr>");
+                    }
                 });
             });
             $("#obradi").click(function () {
@@ -336,6 +395,11 @@
         <h1>                                    SVE VASE VOZNJE</h1>
         <table id="tabelaPocetna" border="1">
             
+        </table>
+
+        <h1>                                    SVE VOZNJE</h1>
+        <table id="tabelaPocetna2" border="1">
+
         </table>
     </div>
 

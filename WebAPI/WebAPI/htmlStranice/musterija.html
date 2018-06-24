@@ -142,6 +142,47 @@
 
                 });
             });
+            $("#sveVoznje").click(function () {
+                $("#sveVoznjeMusterijaTabela").empty();
+                var s1 = $("<th></th>").text("Adresa");
+                var s4 = $("<th></th>").text("Dispecer");
+                var s5 = $("<th></th>").text("Iznos");
+                var s6 = $("<th></th>").text("Status voznje");
+                var s7 = $("<th></th>").text("Vozac");
+                $("#sveVoznjeMusterijaTabela").append("<tr>", s1, s4, s5, s6, s7, "</tr>");
+                $.get("/api/sveVoznjeMusterija", function (data, status) {
+                    var i;
+                    var tipVoznje;
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa);
+                        var txt4 = $("<td></td>").text(data[i].Dispecer);
+                        var txt5 = $("<td></td>").text(data[i].Iznos);
+                        if (data[i].StatusVoznje == 0) {
+                            tipVoznje = "Kreirana";
+                        }
+                        else if (data[i].StatusVoznje == 1) {
+                            tipVoznje = "Otkazana";
+                        }
+                        else if (data[i].StatusVoznje == 2) {
+                            tipVoznje = "Formirana";
+                        }
+                        else if (data[i].StatusVoznje == 3) {
+                            tipVoznje = "Odradjena";
+                        }
+                        else if (data[i].StatusVoznje == 4) {
+                            tipVoznje = "Prihvacena";
+                        }
+                        else if (data[i].StatusVoznje == 5) {
+                            tipVoznje = "Neuspesna";
+                        }
+                        else if (data[i].StatusVoznje == 6) {
+                            tipVoznje = "Uspesna";
+                        }
+                        var txt7 = $("<td></td>").text(data[i].Vozac)
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt4, txt5, tipVoznje, txt7, "</tr>");
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -152,7 +193,14 @@
     <button class="tablink" id="tab1" onclick="openPage('My Profile', this)">My Profile</button>
     <button class="tablink" id="tab2" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
     <button class="tablink" id="Voznje" onclick="openPage('Voznje na cekanju', this)">Voznje na cekanju</button>
+    <button class="tablink" id="sveVoznje" onclick="openPage('Sve voznje', this)" >Sve voznje</button>
 
+    <div id="Sve voznje" class="tabcontent">
+        <h1>                        SVE VASE VOZNJE </h1>
+        <table id="sveVoznjeMusterijaTabela" border="1">
+
+        </table>
+    </div>
 
     <div id="My Profile" class="tabcontent">
         <h3>My Profile</h3>
@@ -201,10 +249,6 @@
                     <tr>
                         <th>E-mail: </th>
                         <td><input type="text" id="email" name="email"></td>
-                    </tr>
-                    <tr>
-                        <th>Voznje: </th>
-                        <td><input type="text" id="voznje" name="voznje"></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>
@@ -283,5 +327,6 @@
                 </tr>
             </table>
     </div>
+
 </body>
 </html>

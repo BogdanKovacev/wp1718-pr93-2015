@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
                 {
                     v.Dispecer = Temp.D.KorisnickoIme;
                     v.Vozac = voznja.Vozac;
-                    v.StatusVoznje = StatusVoznje.Odradjena;
+                    v.StatusVoznje = StatusVoznje.Kreirana;
                     Temp.D.VoznjeKorisnika.Add(v);
                     foreach (Vozac vozac in ListaVozaca.Vozaci)
                     {

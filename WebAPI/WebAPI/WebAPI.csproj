@@ -171,6 +171,7 @@
     <Compile Include="Controllers\DispecerDodajVozacaController.cs" />
     <Compile Include="Controllers\DispecerLicneVoznjeController.cs" />
     <Compile Include="Controllers\DispecerObradaVoznjeController.cs" />
+    <Compile Include="Controllers\DispecerSveVoznjeController.cs" />
     <Compile Include="Controllers\DispecerVoznjaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmenaController.cs" />
@@ -182,12 +183,15 @@
     <Compile Include="Controllers\MusterijaZahtevController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SveVoznjeMusterijaController.cs" />
+    <Compile Include="Controllers\SveVoznjeVozacaController.cs" />
     <Compile Include="Controllers\TrenutnaVoznjaController.cs" />
     <Compile Include="Controllers\UnosOdredistaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
     <Compile Include="Controllers\VozaciController.cs" />
     <Compile Include="Controllers\VozacLokacijaController.cs" />
+    <Compile Include="Controllers\VoznjeController.cs" />
     <Compile Include="Controllers\VoznjeDispecerController.cs" />
     <Compile Include="Controllers\VoznjeKorisnikaController.cs" />
     <Compile Include="Global.asax.cs">

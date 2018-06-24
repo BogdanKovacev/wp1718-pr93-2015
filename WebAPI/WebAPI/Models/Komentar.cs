@@ -21,6 +21,12 @@ namespace WebAPI.Models
             this.Voznja = voznja;
             this.OcenaVoznje = ocenaVoznje;
         }
+
+        public Komentar()
+        {
+            Opis = "";
+            OcenaVoznje = 0;
+        }
         
     }
 }

@@ -98,6 +98,71 @@
                     $("#adresaa").val(data.LokacijaTaksija.Adresa);
                 });
             });
+            $("#mojeVoznje").click(function () {
+                $("#voznje").empty();
+                var s1 = $("<th></th>").text("Pocetna Adresa");
+                var s2 = $("<th></th>").text("Krajnja Adresa");
+                var s4 = $("<th></th>").text("Dispecer");
+                var s5 = $("<th></th>").text("Iznos");
+                var s6 = $("<th></th>").text("Status voznje");
+                var s7 = $("<th></th>").text("Vozac");
+                $("#voznje").append("<tr>", s1, s4, s5, s6, s7, "</tr>");
+                $.get("/api/sveVoznjeVozaca", function (data, status) {
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa);
+                        var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var txt4 = $("<td></td>").text(data[i].Dispecer);
+                        var txt5 = $("<td></td>").text(data[i].Iznos);
+                        var txt6 = $("<td></td>").text(data[i].StatusVoznje);
+                        var txt7 = $("<td></td>").text(data[i].Vozac)
+                        $("#voznje").append("<tr>", txt1,txt2, txt4, txt5, txt6, txt7, "</tr>");
+                    }
+                });
+            });
+            $("#voznjeNaCekanju").click(function () {
+                $("#voznjeCekanje").empty();
+                var s1 = $("<th></th>").text("Pocetna Adresa");
+                var s2 = $("<th></th>").text("Krajnja Adresa");
+                var s4 = $("<th></th>").text("Dispecer");
+                var s5 = $("<th></th>").text("Iznos");
+                var s6 = $("<th></th>").text("Status voznje");
+                var s7 = $("<th></th>").text("Vozac");
+                $("#voznjeCekanje").append("<tr>", s1, s2, s4, s5, s6, s7, "</tr>");
+                $.get("/api/voznje", function (data, status) {
+                    var i;
+                    var tipVoznje;
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa);
+                        var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var txt4 = $("<td></td>").text(data[i].Dispecer);
+                        var txt5 = $("<td></td>").text(data[i].Iznos);
+                        if (data[i].StatusVoznje == 0) {
+                            tipVoznje = "Kreirana";
+                        }
+                        else if (data[i].StatusVoznje == 1) {
+                            tipVoznje = "Otkazana";
+                        }
+                        else if (data[i].StatusVoznje == 2) {
+                            tipVoznje = "Formirana";
+                        }
+                        else if (data[i].StatusVoznje == 3) {
+                            tipVoznje = "Odradjena";
+                        }
+                        else if (data[i].StatusVoznje == 4) {
+                            tipVoznje = "Prihvacena";
+                        }
+                        else if (data[i].StatusVoznje == 5) {
+                            tipVoznje = "Neuspesna";
+                        }
+                        else if (data[i].StatusVoznje == 6) {
+                            tipVoznje = "Uspesna";
+                        }
+                        var txt7 = $("<td></td>").text(data[i].Vozac)
+                        $("#voznjeCekanje").append("<tr>", txt1,txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -105,13 +170,19 @@
         <h1>VOZAC</h1>
         <!-- Tab links -->
 
-        <button class="tablink" onclick="openPage('Pocetna', this)">Pocetna</button>
+        <button class="tablink" id="mojeVoznje" onclick="openPage('Pocetna', this)">Moje voznje</button>
+        <button class="tablink" id="voznjeNaCekanju" onclick="openPage('Voznje na cekanju', this)">Voznje na cekanju</button>
         <button class="tablink" id="Myprofile" onclick="openPage('My Profile', this)">My Profile</button>
         <button class="tablink" id="Lokacija2" onclick="openPage('Lokacija', this)">Lokacija</button>
         <button class="tablink" id="trenutnaVoznja" onclick="openPage('Trenutna voznja', this)">Trenutna voznja</button>
 
+
         <div id="Pocetna" class="tabcontent">
-            Voznje: <input type="text" name="voznje">
+            <table id="voznje" border="1"></table>
+        </div>
+
+        <div id="Voznje na cekanju" class="tabcontent">
+            <table id="voznjeCekanje" border="1"></table>
         </div>
 
         <div id="My Profile" class="tabcontent">
