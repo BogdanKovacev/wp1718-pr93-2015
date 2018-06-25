@@ -8,7 +8,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class PretragaCenaVozacController : ApiController
+    public class PretragaCenaDispecerController : ApiController
     {
         public List<Voznja> Post(FormirajVoznju temp)
         {
@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
 
             if (pom.Equals("od"))
             {
-                foreach (Voznja voznja in Voznje.ListaSortiranihVozac)
+                foreach (Voznja voznja in Voznje.ListaSortiranihDispecer)
                 {
                     if ((int)voznja.Iznos >= int.Parse(temp.OdOcena))
                         ret.Add(voznja);
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             }
             else if (pom.Equals("do"))
             {
-                foreach (Voznja voznja in Voznje.ListaSortiranihVozac)
+                foreach (Voznja voznja in Voznje.ListaSortiranihDispecer)
                 {
                     if ((int)voznja.Iznos <= int.Parse(temp.DoOcena) && (int)voznja.Iznos >= 0)
                         ret.Add(voznja);
@@ -54,14 +54,14 @@ namespace WebAPI.Controllers
             }
             else if (pom.Equals("od-do"))
             {
-                foreach (Voznja voznja in Voznje.ListaSortiranihVozac)
+                foreach (Voznja voznja in Voznje.ListaSortiranihDispecer)
                 {
                     if ((int)voznja.Iznos >= int.Parse(temp.OdOcena) && (int)voznja.Iznos <= int.Parse(temp.DoOcena))
                         ret.Add(voznja);
                 }
             }
 
-            Voznje.ListaSortiranihVozac = ret;
+            Voznje.ListaSortiranihDispecer = ret;
 
             return ret;
         }

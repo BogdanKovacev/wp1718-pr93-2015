@@ -73,7 +73,39 @@ function promenaDispecera() {
 }
 
 function doLogSubmit() {
-    $.post('/api/loggin/Prijava', $('form#loginForm').serialize())
+    let korisnik = {
+        KorisnickoIme: `${$('#korisnickoI').val()}`,
+        Lozinka: `${$('#loz').val()}`,
+    }
+
+    $.ajax({
+        url: '/api/loggin/Prijava',
+        method: 'POST',
+        data: JSON.stringify(korisnik),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            $("#reg").hide();
+            localStorage.setItem("ulogovan", JSON.stringify(data));
+            let recievedObject = JSON.parse(localStorage.getItem("ulogovan"));
+            $("div#errdiv").hide();
+            $("div#logDiv").hide();
+            if (recievedObject.Uloga == 0) {
+                startPocetna();
+            }
+            else if (recievedObject.Uloga == 1) {
+                startDispecer();
+            }
+            else {
+                startVozac();
+            }
+        },
+        error: function (jqXHR) {
+            $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
+        }
+    });
+
+    /*$.post('/api/loggin/Prijava', $('form#loginForm').serialize())
         .done(function (data, status, xhr) {
             $("#reg").hide();
             localStorage.setItem("ulogovan", JSON.stringify(data));
@@ -93,7 +125,7 @@ function doLogSubmit() {
         })
         .fail(function (jqXHR) {
             $("div#errdiv").text(jqXHR.responseJSON["Message"]).show();
-        });
+        });*/
 }
 
 function validateRegister() {

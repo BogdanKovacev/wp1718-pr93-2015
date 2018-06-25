@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             {
                 ocenaTemp = 3;
             }
-            else if (komentar.TipVozila.Equals("Cetri"))
+            else if (komentar.TipVozila.Equals("Cetiri"))
             {
                 ocenaTemp = 4;
             }
@@ -49,6 +49,7 @@ namespace WebAPI.Controllers
                     voznja.StatusVoznje = StatusVoznje.Neuspesna;
                     retKom.Voznja = voznja.Datum;
                     voznja.Komentar = retKom;
+                    voznja.Iznos = -1;
 
                     foreach (Voznja v in Voznje.SveVoznje)
                     {

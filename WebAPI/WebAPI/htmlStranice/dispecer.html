@@ -67,7 +67,7 @@
 
         function filtriraj() {
             $.ajax({
-                url: 'api/filtriranje/post',
+                url: 'api/filtriranjeDispecer/post',
                 method: 'POST',
                 data: {
                     StatusVoznje: document.getElementById("sortStatusVoznja").value,
@@ -111,7 +111,7 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -119,7 +119,7 @@
 
         function sortirajDatum() {
             $.ajax({
-                url: 'api/sortiranjeDatuma/get',
+                url: 'api/sortirajDatumDispecer/get',
                 method: 'GET',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
@@ -160,7 +160,7 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -168,7 +168,7 @@
 
         function sortirajOcena() {
             $.ajax({
-                url: 'api/sortiranjeOcena/get',
+                url: 'api/sortirajOcenaDispecer/get',
                 method: 'GET',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
@@ -209,7 +209,7 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -217,7 +217,7 @@
 
         function pretraziDatum() {
             $.ajax({
-                url: 'api/pretragaDatum/post',
+                url: 'api/pretragaDatumDispecer/post',
                 method: 'POST',
                 data: {
                     Od: document.getElementById("od").value,
@@ -262,7 +262,7 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -270,7 +270,7 @@
 
         function pretraziOcena() {
             $.ajax({
-                url: 'api/pretragaOcena/post',
+                url: 'api/pretragaOcenaDispecer/post',
                 method: 'POST',
                 data: {
                     OdOcena: document.getElementById("odOcena").value,
@@ -315,14 +315,14 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
         function pretraziCenu() {
             $.ajax({
-                url: 'api/pretragaCena/post',
+                url: 'api/pretragaCenaDispecer/post',
                 method: 'POST',
                 data: {
                     OdOcena: document.getElementById("odCena").value,
@@ -367,7 +367,110 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, tipVoznje, txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                    }
+                }
+            });
+        }
+
+        function reset() {
+            $.ajax({
+                url: 'api/dispecerSveVoznje/get',
+                method: 'GET',
+
+                success: function (data) {
+                    $("#sveVoznjeMusterijaTabela").empty();
+                    var s1 = $("<th></th>").text("Pocetna Adresa");
+                    var s2 = $("<th></th>").text("Krajnja Adresa");
+                    var s4 = $("<th></th>").text("Dispecer");
+                    var s5 = $("<th></th>").text("Iznos");
+                    var s6 = $("<th></th>").text("Status voznje");
+                    var s7 = $("<th></th>").text("Vozac");
+                    $("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s4, s5, s6, s7, "</tr>");
+
+                    var i;
+
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa);
+                        var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var txt4 = $("<td></td>").text(data[i].Dispecer);
+                        var txt5 = $("<td></td>").text(data[i].Iznos);
+                        if (data[i].StatusVoznje == 0) {
+                            tipVoznje = "Kreirana";
+                        }
+                        else if (data[i].StatusVoznje == 1) {
+                            tipVoznje = "Otkazana";
+                        }
+                        else if (data[i].StatusVoznje == 2) {
+                            tipVoznje = "Formirana";
+                        }
+                        else if (data[i].StatusVoznje == 3) {
+                            tipVoznje = "Odradjena";
+                        }
+                        else if (data[i].StatusVoznje == 4) {
+                            tipVoznje = "Prihvacena";
+                        }
+                        else if (data[i].StatusVoznje == 5) {
+                            tipVoznje = "Neuspesna";
+                        }
+                        else if (data[i].StatusVoznje == 6) {
+                            tipVoznje = "Uspesna";
+                        }
+                        var txt7 = $("<td></td>").text(data[i].Vozac)
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                    }
+                }
+            });
+        }
+
+        function pretraziImeIPrezime() {
+            $.ajax({
+                url: 'api/pretragaImeIPrezime/post',
+                method: 'POST',
+                data: {
+                    OdOcena: document.getElementById("imePretraga").value,
+                    DoOcena: document.getElementById("prezimePretraga").value,
+                },
+                success: function (data) {
+                    $("#sveVoznjeMusterijaTabela").empty();
+                    var s1 = $("<th></th>").text("Pocetna Adresa");
+                    var s2 = $("<th></th>").text("Krajnja Adresa");
+                    var s4 = $("<th></th>").text("Dispecer");
+                    var s5 = $("<th></th>").text("Iznos");
+                    var s6 = $("<th></th>").text("Status voznje");
+                    var s7 = $("<th></th>").text("Vozac");
+                    $("#sveVoznjeMusterijaTabela").append("<tr>", s1, s2, s4, s5, s6, s7, "</tr>");
+
+                    var i;
+
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa);
+                        var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                        var txt4 = $("<td></td>").text(data[i].Dispecer);
+                        var txt5 = $("<td></td>").text(data[i].Iznos);
+                        if (data[i].StatusVoznje == 0) {
+                            tipVoznje = "Kreirana";
+                        }
+                        else if (data[i].StatusVoznje == 1) {
+                            tipVoznje = "Otkazana";
+                        }
+                        else if (data[i].StatusVoznje == 2) {
+                            tipVoznje = "Formirana";
+                        }
+                        else if (data[i].StatusVoznje == 3) {
+                            tipVoznje = "Odradjena";
+                        }
+                        else if (data[i].StatusVoznje == 4) {
+                            tipVoznje = "Prihvacena";
+                        }
+                        else if (data[i].StatusVoznje == 5) {
+                            tipVoznje = "Neuspesna";
+                        }
+                        else if (data[i].StatusVoznje == 6) {
+                            tipVoznje = "Uspesna";
+                        }
+                        var txt7 = $("<td></td>").text(data[i].Vozac)
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5,"<td>", tipVoznje,"</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -724,13 +827,13 @@
             <option value="Neuspesna" id="Neuspesna">Neuspesna</option>
             <option value="Uspesna" id="Uspesna">Uspesna</option>
         </select>
-        <br />
+        <br/>
         <input type="submit" value="Filtriraj po statusu voznje" onclick="filtriraj()">
-        <br />
+        <br/>
         <input type="submit" value="Sortiraj po datumu" onclick="sortirajDatum()">
-        <br />
+        <br/>
         <input type="submit" value="Sortiraj po ocenama" onclick="sortirajOcena()">
-        <br />
+        <br/>
 
         <label for="od">OD: </label>
         <input type="date" id="od" name="od"
@@ -742,7 +845,7 @@
         <span class="validity"></span>
         <input type="submit" value="Pretrazi" onclick="pretraziDatum()">
 
-        <br />
+        <br/>
 
         <label>OD: </label>
         <select id="odOcena">
@@ -766,7 +869,7 @@
         </select>
         <input type="submit" value="Pretrazi" onclick="pretraziOcena()">
 
-        <br />
+        <br/>
 
         <label>OD: </label>
         <input type="text" id="odCena" value="">
@@ -774,7 +877,15 @@
         <input type="text" id="doCena" value="">
         <input type="submit" value="Pretrazi" onclick="pretraziCenu()">
 
-        <br />
+        <br/>
+        <label>IME: </label>
+        <input type="text" id="imePretraga" value="">
+        <label>PREZIME: </label>
+        <input type="text" id="prezimePretraga" value="">
+        <input type="submit" value="Pretrazi" onclick="pretraziImeIPrezime()">
+        <br/>
+        <input type="submit" value="Reset" onclick="reset()">
+        <br/>
     </div>
 
     <div id="Formiraj voznju" class="tabcontent">

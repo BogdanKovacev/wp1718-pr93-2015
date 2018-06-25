@@ -12,6 +12,7 @@ namespace WebAPI.Controllers
     {
         public List<Voznja> Get()
         {
+            Voznje.ListaSortiranihDispecer = Voznje.SveVoznje;
             return Voznje.SveVoznje;
         }
     }

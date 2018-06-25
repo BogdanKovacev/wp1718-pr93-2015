@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
             {
                 foreach (Voznja voznja in Voznje.ListaSortiranih)
                 {
-                    if ((int)voznja.Iznos <= int.Parse(temp.DoOcena))
+                    if ((int)voznja.Iznos <= int.Parse(temp.DoOcena) && (int)voznja.Iznos >= 0)
                         ret.Add(voznja);
                 }
             }
