@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
@@ -29,7 +31,29 @@ namespace WebAPI.Controllers
                 }
             }
             musterija.VoznjeKorisnika = new List<Voznja>();
-            ListaMusterija.Musterije.Add(musterija);            
+            ListaMusterija.Musterije.Add(musterija);
+
+            ///////////////////////// DODAJ MUSTERIJU U BAZU
+
+            string line = "";
+
+            foreach (Musterija d in ListaMusterija.Musterije)
+            {
+                string pol = "";
+
+                if (d.Pol == PolEnum.Muski)
+                {
+                    pol = "Muski";
+                }
+                else
+                {
+                    pol = "Zenski";
+                }
+
+                line += d.KorisnickoIme + "," + d.Lozinka + "," + d.Ime + "," + d.Prezime + "," + pol + "," + d.Jmbg + "," + d.KontaktTelefon + "," + d.Email + ";";
+            }
+
+            File.WriteAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\musterije.txt", line);
 
             return CreatedAtRoute("DefaultApi", new { id = musterija.KorisnickoIme }, musterija);           
         }
@@ -78,6 +102,7 @@ namespace WebAPI.Controllers
                     return BadRequest("Neispravna lozinka !!!");
 
                 Temp.M = m1;
+                HttpContext.Current.Session["ulogovan"] = Temp.M as Musterija;
                 return Ok(m1);
             }
             else if (dT == 1)
@@ -87,6 +112,7 @@ namespace WebAPI.Controllers
                     return BadRequest("Neispravna lozinka !!!");
 
                 Temp.D = m1;
+                HttpContext.Current.Session["ulogovan"] = Temp.D as Dispecer;
                 return Ok(m1);
             }
             else
@@ -96,13 +122,16 @@ namespace WebAPI.Controllers
                     return BadRequest("Neispravna lozinka !!!");
 
                 Temp.V = m1;
+                HttpContext.Current.Session["ulogovan"] = Temp.V as Vozac;
                 return Ok(m1);
             }
         }
 
         public Korisnik Get()
         {
-            return Temp.M;
+            Korisnik k = (Korisnik)HttpContext.Current.Session["ulogovan"];
+            
+            return k;
         }
 
     }

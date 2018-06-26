@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
 {
     public class SortirajDatumDispecerController : ApiController
     {
-        public List<Voznja> Post()
+        public List<Voznja> Get()
         {
             List<Voznja> ret = new List<Voznja>();
             ret = Voznje.ListaSortiranihDispecer;

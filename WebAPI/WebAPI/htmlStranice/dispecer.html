@@ -29,49 +29,68 @@
         }
 
         function formiraj() {
-            alert($("#lokacijaVoznje").val());
+
+            let korisnik = {
+                LokacijaTaksija: `${$('#lokacijaVoznje').val()}`,
+                Vozac: `${$('#vozacSelect').val()}`,
+                TipVozila: `${$('#tipAutomobila').val()}`,
+            }
 
             $.ajax({
                 url: 'api/dispecerVoznja/post',
                 method: 'POST',
-                data: {
-                    LokacijaTaksija: $("#lokacijaVoznje").val(),
-                    Vozac: $("#vozacSelect").val(),
-                    TipVozila: $("#tipAutomobila").val()
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Uspesno formiran");
+                    startApp();
                 }
             });
-
         }
 
         function obradi() {
-            $.get("/api/dispecerObradaVoznje", function (data, status) {
-                var i;
+            $.ajax({
+                url: '/api/dispecerObradaVoznje',
+                method: 'GET',
+                success: function (data) {
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        if ($("#check" + i).prop('checked')) {
 
-                for (i = 0; i < data.length; i++) {
-                    if ($("#check" + i).prop('checked')) {
-                        $.ajax({
-                            url: 'api/voznjeDispecer/post',
-                            method: 'POST',
-                            data: {
-                                Adresa: data[i].LokacijaTaksija.Adresa,
-                                Vozac: document.getElementById("obradiVoznjuVozac").value,
-                            },
-                            success: function (data) {
-                                startDispecer();
-                            }
-                        });
+                            let voznja =
+			                {
+			                    Adresa: `${data[i].LokacijaTaksija.Adresa}`,
+			                    Vozac: `${$("#obradiVoznjuVozac").val()}`
+			                }
+
+                            $.ajax({
+                                url: 'api/voznjeDispecer/post',
+                                method: 'POST',
+                                data: JSON.stringify(voznja),
+                                contentType: 'application/json; charset=utf-8',
+                                dataType: 'json',
+                                success: function (data) {
+                                    startDispecer();
+                                }
+                            });
+                        }
                     }
                 }
             });
         }
 
         function filtriraj() {
+            let korisnik = {
+                StatusVoznje: `${$('#sortStatusVoznja').val()}`,
+            }
+
             $.ajax({
                 url: 'api/filtriranjeDispecer/post',
                 method: 'POST',
-                data: {
-                    StatusVoznje: document.getElementById("sortStatusVoznja").value,
-                },
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
                     var s1 = $("<th></th>").text("Pocetna Adresa");
@@ -111,15 +130,16 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
 
         function sortirajDatum() {
+            alert("SORTIRAJ DATUM");
             $.ajax({
-                url: 'api/sortirajDatumDispecer/get',
+                url: 'api/sortirajDatumDispecer',
                 method: 'GET',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
@@ -160,15 +180,16 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>"+ tipVoznje+ "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
 
         function sortirajOcena() {
+            alert("SORTIRAJ OCENA");
             $.ajax({
-                url: 'api/sortirajOcenaDispecer/get',
+                url: 'api/sortirajOcenaDispecer',
                 method: 'GET',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
@@ -209,20 +230,24 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>"+ tipVoznje+ "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
 
         function pretraziDatum() {
+            let korisnik = {
+                Od: `${$('#od').val()}`,
+                Do: `${$('#do').val()}`,
+            }
+
             $.ajax({
                 url: 'api/pretragaDatumDispecer/post',
                 method: 'POST',
-                data: {
-                    Od: document.getElementById("od").value,
-                    Do: document.getElementById("do").value,
-                },
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
                     var s1 = $("<th></th>").text("Pocetna Adresa");
@@ -262,20 +287,24 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
 
         function pretraziOcena() {
+            let korisnik = {
+                OdOcena: `${$('#odOcena').val()}`,
+                DoOcena: `${$('#doOcena').val()}`,
+            }
+
             $.ajax({
                 url: 'api/pretragaOcenaDispecer/post',
                 method: 'POST',
-                data: {
-                    OdOcena: document.getElementById("odOcena").value,
-                    DoOcena: document.getElementById("doOcena").value,
-                },
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
                     var s1 = $("<th></th>").text("Pocetna Adresa");
@@ -315,19 +344,25 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
+
         function pretraziCenu() {
+
+            let korisnik = {
+                OdOcena: `${$('#odCena').val()}`,
+                DoOcena: `${$('#doCena').val()}`,
+            }
+
             $.ajax({
                 url: 'api/pretragaCenaDispecer/post',
                 method: 'POST',
-                data: {
-                    OdOcena: document.getElementById("odCena").value,
-                    DoOcena: document.getElementById("doCena").value,
-                },
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
                     var s1 = $("<th></th>").text("Pocetna Adresa");
@@ -367,7 +402,7 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -417,20 +452,25 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
                     }
                 }
             });
         }
 
         function pretraziImeIPrezime() {
+
+            let korisnik = {
+                OdOcena: `${$('#imePretraga').val()}`,
+                DoOcena: `${$('#prezimePretraga').val()}`,
+            }
+
             $.ajax({
                 url: 'api/pretragaImeIPrezime/post',
                 method: 'POST',
-                data: {
-                    OdOcena: document.getElementById("imePretraga").value,
-                    DoOcena: document.getElementById("prezimePretraga").value,
-                },
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 success: function (data) {
                     $("#sveVoznjeMusterijaTabela").empty();
                     var s1 = $("<th></th>").text("Pocetna Adresa");
@@ -470,7 +510,7 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5,"<td>", tipVoznje,"</td>", txt7, "</tr>");
+                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
                     }
                 }
             });
@@ -481,32 +521,39 @@
         $(document).ready(function () {
             jQuery('#Myprofile').click();
             $("#Myprofile").click(function () {
-                $.get("/api/dispecer", function (data, status) {
-                    $("#korisnickoIme").val(data.KorisnickoIme);
-                    $("#ime").val(data.Ime);
-                    $("#prezime").val(data.Prezime);
-                    $("#kontaktTelefon").val(data.KontaktTelefon);
-                    if (data.Pol == 0) {
-                        $("#Muski").attr("selected", "true");
+                $.ajax({
+                    url: '/api/dispecer',
+                    method: 'GET',
+                    success: function (data) {                
+                        $("#korisnickoImePromenaDispecer").val(data.KorisnickoIme);
+                        $("#imePromenaDispecer").val(data.Ime);
+                        $("#prezimePromenaDispecer").val(data.Prezime);
+                        $("#kontaktTelefonPromenaDispecer").val(data.KontaktTelefon);
+                        if (data.Pol == 0) {
+                            $("#Muski").attr("selected", "true");
+                        }
+                        else {
+                            $("#Zenski").attr("selected", "true");
+                        }
+                        $("#lozinkaPromenaDispecer").val(data.Lozinka);
+                        $("#jmbgPromenaDispecer").val(data.Jmbg);
+                        $("#emailPromenaDispecer").val(data.Email);
+                        $("#uloga").val(data.Uloga);
+                        $("#voznje").val(data.VoznjeKorisnika);
                     }
-                    else {
-                        $("#Zenski").attr("selected", "true");
-                    }
-                    $("#lozinka").val(data.Lozinka);
-                    $("#jmbg").val(data.Jmbg);
-                    $("#email").val(data.Email);
-                    $("#uloga").val(data.Uloga);
-                    $("#voznje").val(data.VoznjeKorisnika);
                 });
             });
             $("#FormirajVoznjuTab").click(function () {
-                $.get("/api/dispecerVoznja", function (data, status) {
-                    $("#vozacSelect").empty();
-                    var i;
-                    for(i = 0; i < data.length;i++)
-                    {
-                        var s = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").attr("id", data[i].KorisnickoIme);
-                        $("#vozacSelect").append(s);
+                $.ajax({
+                    url: '/api/dispecerVoznja',
+                    method: 'GET',
+                    success: function (data) {
+                        $("#vozacSelect").empty();
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            var s = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").attr("id", data[i].KorisnickoIme);
+                            $("#vozacSelect").append(s);
+                        }
                     }
                 });
             });
@@ -523,54 +570,57 @@
                 var t9 = $("<td></td>").text("Datum Komentara");
                 var t10 = $("<td></td>").text("Ocena");
                 $("#tabelaPocetna").append("<tr>",t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,"</tr>");
+                $.ajax({
+                    url: '/api/dispecerLicneVoznje',
+                    method: 'GET',
+                    success: function (data) {
+                        var i;
+                        var tip;
+                        var tipVoznje;
+                        for (i = 0; i < data.length; i++) {
+                            var s1 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                            var s2 = $("<td></td>").text(data[i].Datum);
+                            if (data[i].TipVozila == 0) {
+                                tip = "Putnicki";
+                            }
+                            else if (data[i].TipVozila == 1) {
+                                tip = "Kombi";
+                            }
+                            else if (data[i].TipVozila == 2) {
+                                tip = "Podrazumevani";
+                            }
+                            var s3 = $("<td></td>").text(tip);
+                            var s4 = $("<td></td>").text(data[i].Musterija);
+                            var s5 = $("<td></td>").text(data[i].Vozac);
+                            var s6 = $("<td></td>").text(data[i].Iznos);
+                            if (data[i].StatusVoznje == 0) {
+                                tipVoznje = "Kreirana";
+                            }
+                            else if (data[i].StatusVoznje == 1) {
+                                tipVoznje = "Otkazana";
+                            }
+                            else if (data[i].StatusVoznje == 2) {
+                                tipVoznje = "Formirana";
+                            }
+                            else if (data[i].StatusVoznje == 3) {
+                                tipVoznje = "Odradjena";
+                            }
+                            else if (data[i].StatusVoznje == 4) {
+                                tipVoznje = "Prihvacena";
+                            }
+                            else if (data[i].StatusVoznje == 5) {
+                                tipVoznje = "Neuspesna";
+                            }
+                            else if (data[i].StatusVoznje == 6) {
+                                tipVoznje = "Uspesna";
+                            }
+                            var s7 = $("<td></td>").text(tipVoznje);
+                            var s8 = $("<td></td>").text(data[i].Komentar.Opis);
+                            var s9 = $("<td></td>").text(data[i].Komentar.DatumObjave);
+                            var s10 = $("<td></td>").text(data[i].Komentar.OcenaVoznje);
 
-                $.get("/api/dispecerLicneVoznje", function (data, status) {
-                    var i;
-                    var tip;
-                    var tipVoznje;
-                    for (i = 0; i < data.length; i++) {
-                        var s1 = $("<td></td>").text(data[i].Odrediste.Adresa);
-                        var s2 = $("<td></td>").text(data[i].Datum);
-                        if (data[i].TipVozila == 0) {
-                            tip = "Putnicki";
+                            $("#tabelaPocetna").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, "</tr>");
                         }
-                        else if (data[i].TipVozila == 1) {
-                            tip = "Kombi";
-                        }
-                        else if (data[i].TipVozila == 2) {
-                            tip = "Podrazumevani";
-                        }
-                        var s3 = $("<td></td>").text(tip);
-                        var s4 = $("<td></td>").text(data[i].Musterija);
-                        var s5 = $("<td></td>").text(data[i].Vozac);
-                        var s6 = $("<td></td>").text(data[i].Iznos);
-                        if (data[i].StatusVoznje == 0) {
-                            tipVoznje = "Kreirana";
-                        }
-                        else if (data[i].StatusVoznje == 1) {
-                            tipVoznje = "Otkazana";
-                        }
-                        else if (data[i].StatusVoznje == 2) {
-                            tipVoznje = "Formirana";
-                        }
-                        else if (data[i].StatusVoznje == 3) {
-                            tipVoznje = "Odradjena";
-                        }
-                        else if (data[i].StatusVoznje == 4) {
-                            tipVoznje = "Prihvacena";
-                        }
-                        else if (data[i].StatusVoznje == 5) {
-                            tipVoznje = "Neuspesna";
-                        }
-                        else if (data[i].StatusVoznje == 6) {
-                            tipVoznje = "Uspesna";
-                        }
-                        var s7 = $("<td></td>").text(tipVoznje);
-                        var s8 = $("<td></td>").text(data[i].Komentar.Opis);
-                        var s9 = $("<td></td>").text(data[i].Komentar.DatumObjave);
-                        var s10 = $("<td></td>").text(data[i].Komentar.OcenaVoznje);
-
-                        $("#tabelaPocetna").append("<tr>", s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,"</tr>");
                     }
                 });
                 $("#tabelaPocetna2").empty();
@@ -585,78 +635,89 @@
                 var t9 = $("<td></td>").text("Datum Komentara");
                 var t10 = $("<td></td>").text("Ocena");
                 $("#tabelaPocetna2").append("<tr>", t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, "</tr>");
-                $.get("/api/dispecerSveVoznje", function (data, status) {
-                    var i;
-                    var tip;
-                    var tipVoznje;
-                    for (i = 0; i < data.length; i++) {
-                        var s1 = $("<td></td>").text(data[i].Odrediste.Adresa);
-                        var s2 = $("<td></td>").text(data[i].Datum);
-                        if (data[i].TipVozila == 0) {
-                            tip = "Putnicki";
-                        }
-                        else if (data[i].TipVozila == 1) {
-                            tip = "Kombi";
-                        }
-                        else if (data[i].TipVozila == 2) {
-                            tip = "Podrazumevani";
-                        }
-                        var s3 = $("<td></td>").text(tip);
-                        var s4 = $("<td></td>").text(data[i].Musterija);
-                        var s5 = $("<td></td>").text(data[i].Vozac);
-                        var s6 = $("<td></td>").text(data[i].Iznos);
-                        if (data[i].StatusVoznje == 0) {
-                            tipVoznje = "Kreirana";
-                        }
-                        else if (data[i].StatusVoznje == 1) {
-                            tipVoznje = "Otkazana";
-                        }
-                        else if (data[i].StatusVoznje == 2) {
-                            tipVoznje = "Formirana";
-                        }
-                        else if (data[i].StatusVoznje == 3) {
-                            tipVoznje = "Odradjena";
-                        }
-                        else if (data[i].StatusVoznje == 4) {
-                            tipVoznje = "Prihvacena";
-                        }
-                        else if (data[i].StatusVoznje == 5) {
-                            tipVoznje = "Neuspesna";
-                        }
-                        else if (data[i].StatusVoznje == 6) {
-                            tipVoznje = "Uspesna";
-                        }
-                        var s7 = $("<td></td>").text(tipVoznje);
-                        var s8 = $("<td></td>").text(data[i].Komentar.Opis);
-                        var s9 = $("<td></td>").text(data[i].Komentar.DatumObjave);
-                        var s10 = $("<td></td>").text(data[i].Komentar.OcenaVoznje);
+                $.ajax({
+                    url: '/api/dispecerSveVoznje',
+                    method: 'GET',
+                    success: function (data) {
+                        var i;
+                        var tip;
+                        var tipVoznje;
+                        for (i = 0; i < data.length; i++) {
+                            var s1 = $("<td></td>").text(data[i].Odrediste.Adresa);
+                            var s2 = $("<td></td>").text(data[i].Datum);
+                            if (data[i].TipVozila == 0) {
+                                tip = "Putnicki";
+                            }
+                            else if (data[i].TipVozila == 1) {
+                                tip = "Kombi";
+                            }
+                            else if (data[i].TipVozila == 2) {
+                                tip = "Podrazumevani";
+                            }
+                            var s3 = $("<td></td>").text(tip);
+                            var s4 = $("<td></td>").text(data[i].Musterija);
+                            var s5 = $("<td></td>").text(data[i].Vozac);
+                            var s6 = $("<td></td>").text(data[i].Iznos);
+                            if (data[i].StatusVoznje == 0) {
+                                tipVoznje = "Kreirana";
+                            }
+                            else if (data[i].StatusVoznje == 1) {
+                                tipVoznje = "Otkazana";
+                            }
+                            else if (data[i].StatusVoznje == 2) {
+                                tipVoznje = "Formirana";
+                            }
+                            else if (data[i].StatusVoznje == 3) {
+                                tipVoznje = "Odradjena";
+                            }
+                            else if (data[i].StatusVoznje == 4) {
+                                tipVoznje = "Prihvacena";
+                            }
+                            else if (data[i].StatusVoznje == 5) {
+                                tipVoznje = "Neuspesna";
+                            }
+                            else if (data[i].StatusVoznje == 6) {
+                                tipVoznje = "Uspesna";
+                            }
+                            var s7 = $("<td></td>").text(tipVoznje);
+                            var s8 = $("<td></td>").text(data[i].Komentar.Opis);
+                            var s9 = $("<td></td>").text(data[i].Komentar.DatumObjave);
+                            var s10 = $("<td></td>").text(data[i].Komentar.OcenaVoznje);
 
-                        $("#tabelaPocetna2").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, "</tr>");
+                            $("#tabelaPocetna2").append("<tr>", s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, "</tr>");
+                        }
                     }
                 });
             });
             $("#obradi").click(function () {
                 $("#obradiVoznjuTabela").empty();
+                $("#obradiVoznjuVozac").empty();
                 $("#obradiVoznjuTabela").append("<tr><th colspan=\"3\" align=\"center\">Voznje na cekanju</th></tr>");
                 $("#obradiVoznjuTabela").append("<tr><th>Ulica</th><th>Broj</th><th></th></tr>");
+                $.ajax({
+                    url: '/api/dispecerObradaVoznje',
+                    method: 'GET',
+                    success: function (data) {
 
+                        var i;
 
-                $.get("/api/dispecerObradaVoznje", function (data, status) {
-                    var i;
-
-                    for (i = 0; i < data.length; i++) {
-                        var txt1 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaTaksija.Adresa + "\" id=\"ulica" + i + "\"></td>").text(data[i].LokacijaTaksija.Adresa);
-                        var txt3 = $("<td><input type=\"radio\" name=\"radioButton\"id=\"check" + i + "\"></td>");
-                        $("#obradiVoznjuTabela").append("<tr>", txt1, txt3, "</tr>");
+                        for (i = 0; i < data.length; i++) {
+                            var txt1 = $("<td><input type=\"text\" readonly value=\"" + data[i].LokacijaTaksija.Adresa + "\" id=\"ulica" + i + "\"></td>").text(data[i].LokacijaTaksija.Adresa);
+                            var txt3 = $("<td><input type=\"radio\" name=\"radioButton\"id=\"check" + i + "\"></td>");
+                            $("#obradiVoznjuTabela").append("<tr>", txt1, txt3, "</tr>");
+                        }
                     }
                 });
+                $.ajax({
+                    url: '/api/vozaci',
+                    method: 'GET',
+                    success: function (data) {
+                        var i;
 
-                $.get("/api/vozaci", function (data, status) {
-                    var i;
-
-                    for (i = 0; i < data.length; i++) {
-                        var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
-                        $("#obradiVoznjuVozac").append(txt1);
+                        for (i = 0; i < data.length; i++) {
+                            var txt1 = $("<option value=\"" + data[i].KorisnickoIme + "\" >" + data[i].KorisnickoIme + "</option>").text(data[i].KorisnickoIme);
+                            $("#obradiVoznjuVozac").append(txt1);
+                        }
                     }
                 });
             });
@@ -741,25 +802,25 @@
                     </tr>
                     <tr>
                         <th>Korisnicko ime: </th>
-                        <td><input type="text" readonly name="korisnickoIme" id="korisnickoIme"></td>
+                        <td><input type="text" readonly name="korisnickoIme" id="korisnickoImePromenaDispecer"></td>
                     </tr>
                     <tr>
                         <th>Lozinka: </th>
-                        <td><input type="text" name="lozinka" id="lozinka"></td>
+                        <td><input type="text" name="lozinka" id="lozinkaPromenaDispecer"></td>
                     </tr>
                     <tr>
                         <th>Ime: </th>
-                        <td><input type="text" name="ime" id="ime"></td>
+                        <td><input type="text" name="ime" id="imePromenaDispecer"></td>
                     </tr>
                     <tr>
                         <th>Prezime: </th>
-                        <td><input type="text" name="prezime" id="prezime"></td>
+                        <td><input type="text" name="prezime" id="prezimePromenaDispecer"></td>
                     </tr>
                     <tr>
 
                         <th>Pol: </th>
                         <td>
-                            <select id="pol" name="pol">
+                            <select id="polPromenaDispecer" name="pol">
                                 <option value="Muski" id="Muski">Muski</option>
                                 <option value="Zenski" id="Zenski">Zenski</option>
                             </select>
@@ -767,29 +828,15 @@
                     </tr>
                     <tr>
                         <th>JMBG: </th>
-                        <td><input type="text" name="jmbg" id="jmbg"></td>
+                        <td><input type="text" name="jmbg" id="jmbgPromenaDispecer"></td>
                     </tr>
                     <tr>
                         <th>Kontakt telefon: </th>
-                        <td><input type="text" name="kontaktTelefon" id="kontaktTelefon"></td>
+                        <td><input type="text" name="kontaktTelefon" id="kontaktTelefonPromenaDispecer"></td>
                     </tr>
                     <tr>
                         <th>E-mail: </th>
-                        <td><input type="text" name="email" id="email"></td>
-                    </tr>
-                    <tr>
-                        <th>Uloga: </th>
-                        <td>
-                            <select id="uloga" name="uloga">
-                                <option value="Musterija">Musterija</option>
-                                <option value="Vozac">Vozac</option>
-                                <option value="Dispecer">Dispecer</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Voznje: </th>
-                        <td><input type="text" name="voznjeKorisnika"></td>
+                        <td><input type="text" name="email" id="emailPromenaDispecer"></td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Sačuvaj"></td>

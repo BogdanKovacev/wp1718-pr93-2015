@@ -1,0 +1,1 @@
+6/26/2018 4:10:41 PM,,,da 3,  d 4,Podrazumevani,,,,da 3, d 4,Dispecer,vozac1,0,,1/1/0001 12:00:00 AM,,1/1/0001 12:00:00 AM,-1,Formirana;6/26/2018 9:24:28 PM,45.24218706001053,19.84027514138529,Podgorička 4, Novi Sad 21000,Podrazumevani,Dasa,45.24218706001053,19.84027514138529,Podgorička 4, Novi Sad 21000,,,-1,,1/1/0001 12:00:00 AM,,1/1/0001 12:00:00 AM,-1,Kreirana;

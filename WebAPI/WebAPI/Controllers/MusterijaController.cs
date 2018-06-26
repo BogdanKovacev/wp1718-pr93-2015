@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -32,11 +33,7 @@ namespace WebAPI.Controllers
 
         [ResponseType(typeof(void))]
         public IHttpActionResult Post(Musterija korisnik)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        {            
 
             Temp.M = korisnik;
 
@@ -51,7 +48,29 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            ////////////////////////////// IZMENI MUSTERIJU U BAZI
+
+            string line = "";
+
+            foreach (Musterija d in ListaMusterija.Musterije)
+            {
+                string pol = "";
+
+                if (d.Pol == PolEnum.Muski)
+                {
+                    pol = "Muski";
+                }
+                else
+                {
+                    pol = "Zenski";
+                }
+
+                line += d.KorisnickoIme + "," + d.Lozinka + "," + d.Ime + "," + d.Prezime + "," + pol + "," + d.Jmbg + "," + d.KontaktTelefon + "," + d.Email + ";";
+            }
+
+            File.WriteAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\musterije.txt", line);
+
+            return StatusCode(HttpStatusCode.OK);
         }
 
         public Musterija Get()

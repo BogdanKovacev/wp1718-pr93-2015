@@ -25,7 +25,7 @@ namespace WebAPI.Models
         public Komentar()
         {
             Opis = "";
-            OcenaVoznje = 0;
+            OcenaVoznje = -1;
         }
         
     }

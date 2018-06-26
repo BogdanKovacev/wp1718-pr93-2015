@@ -23,7 +23,7 @@ namespace WebAPI.Models
         public string Random()
         {
             Random r = new Random();
-            return string.Format("{0}°{1}'{2}.{3}", r.Next(0, 50), r.Next(0, 50), r.Next(0, 50), r.Next(0, 130));
+            return string.Format("{0}.{1}", r.Next(0, 50),r.Next(0, 100000000));
         }
         
     }

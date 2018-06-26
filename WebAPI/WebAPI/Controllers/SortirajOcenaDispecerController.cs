@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
 {
     public class SortirajOcenaDispecerController : ApiController
     {
-        public List<Voznja> Post()
+        public List<Voznja> Get()
         {
             List<Voznja> temp = new List<Voznja>();
             temp = Voznje.ListaSortiranihDispecer;
