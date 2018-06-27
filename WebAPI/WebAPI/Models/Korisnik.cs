@@ -17,6 +17,7 @@ namespace WebAPI.Models
         public string Email { get; set; }
         public UlogaEnum Uloga { get; set; }
         public List<Voznja> VoznjeKorisnika { get; set; }
+        public bool Blokiran { get; set; }
 
         public Korisnik()
         {
@@ -35,6 +36,7 @@ namespace WebAPI.Models
             this.Email = email;
             this.Uloga = uloga;
             this.VoznjeKorisnika = new List<Voznja>();
+            Blokiran = false;
         }
     }
 }

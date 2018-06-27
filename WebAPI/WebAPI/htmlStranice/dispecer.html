@@ -516,6 +516,30 @@
             });
         }
 
+        function blokirajDugme() {
+            var a;
+            var b = globalReturn2();
+            for (a = 0; a < b; a++) {
+                if ($("#checkbox" + a).prop('checked')) {
+                    let korisnik =
+					{
+					    Iznos: `${a}`,
+					}
+                    $.ajax({
+                        url: 'api/korisnici/post',
+                        method: 'POST',
+                        data: JSON.stringify(korisnik),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                            alert(data);
+                        }
+                    })
+                }
+            }
+            loadDispecer();
+        }
+
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -721,6 +745,22 @@
                     }
                 });
             });
+            $("#blokiraj").click(function () {
+                $("#korisnici").empty();
+                var s1 = $("<th></th>").text("Korisnicko ime");
+                var s2 = $("<th></th>");
+                $("#korisnici").append("<tr>", s1, s2, "</tr>");
+
+                $.get("/api/korisnici", function (data, status) {
+                    var i;
+                    globalSet2(data.length);
+                    for (i = 0; i < data.length; i++) {
+                        var txt1 = $("<td></td>").text(data[i].KorisnickoIme);
+                        $("#korisnici").append("<tr>", txt1, "<td><input type=\"checkbox\" name=\"korisnik\" id=\"checkbox" + i + "\">", "</td></tr>");
+                    }
+
+                });
+            });
         });
     </script>
 </head>
@@ -733,6 +773,8 @@
     <button class="tablink" id="FormirajVoznjuTab" onclick="openPage('Formiraj voznju', this)">Formiraj voznju</button>
     <button class="tablink" id="obradi" onclick="openPage('Obradi voznju', this)">Obradi voznju</button>
     <button class="tablink" onclick="openPage('Napravi vozaca', this)">Napravi vozaca</button>
+    <button class="tablink" id="blokiraj" onclick="openPage('Blokiraj korisnika', this)">Blokiraj korisnika</button>
+
 
     <div id="Napravi vozaca" class="tabcontent">
         <p>
@@ -979,5 +1021,13 @@
         <select id="obradiVoznjuVozac"></select>
         <input type="submit" value="Obradi" onclick="obradi()">
     </div>
+
+    <div class="tabcontent" id="Blokiraj korisnika">
+        <p>
+            <table id="korisnici" border="1"></table>
+            <input type="submit" value="OK" onclick="blokirajDugme()">
+        </p>
+    </div>
+
 </body>
 </html>

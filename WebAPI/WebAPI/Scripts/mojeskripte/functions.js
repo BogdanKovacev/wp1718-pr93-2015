@@ -720,3 +720,13 @@ function displayLocation(latitude, longitude) {
     request.send();
     return address.formatted_address;
 };
+
+var b;
+
+function globalSet2(index) {
+    b = index;
+}
+
+function globalReturn2() {
+    return b;
+}

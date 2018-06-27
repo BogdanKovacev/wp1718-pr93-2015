@@ -39,25 +39,25 @@ namespace WebAPI
             ////////////////////////////////////// UCITAVANJE VOZNJI IZ FAJLA
             string textVoznje = System.IO.File.ReadAllText(@"E:\faks\treca\WEB\Projekat\wp1718-pr93-2015\WebAPI\WebAPI\voznje.txt");
             string[] lineVoznje = textVoznje.Split(',',';');
-            int countVoznje = lineVoznje.Count() / 19;
+            int countVoznje = lineVoznje.Count() / 20;
             for(int i = 0; i < countVoznje;i++)
             {
-                DateTime Datum = DateTime.Parse(lineVoznje[i*19]);
+                DateTime Datum = DateTime.Parse(lineVoznje[i*20]);
 
-                string x = lineVoznje[i * 19 + 1];
-                string y = lineVoznje[i * 19 + 2];
-                string adresa = lineVoznje[i * 19 + 3];
-                adresa += ", ";
-                adresa += lineVoznje[i * 19 + 4];
+                string x = lineVoznje[i * 20 + 1];
+                string y = lineVoznje[i * 20 + 2];
+                string adresa = lineVoznje[i * 20 + 3];
+                adresa += ",";
+                adresa += lineVoznje[i * 20 + 4];
                 Lokacija lokacijaTaxija = new Lokacija(x, y, adresa);
 
                 TipVozilaEnum tipVozila = TipVozilaEnum.Podrazumevani;
 
-                if(lineVoznje[i * 19 + 5].Equals("Putnicki"))
+                if(lineVoznje[i * 20 + 5].Equals("Putnicki"))
                 {
                     tipVozila = TipVozilaEnum.Putnicki;
                 }
-                else if (lineVoznje[i * 19 + 5].Equals("Kombi"))
+                else if (lineVoznje[i * 20 + 5].Equals("Kombi"))
                 {
                     tipVozila = TipVozilaEnum.Kombi;
                 }
@@ -66,54 +66,54 @@ namespace WebAPI
                     tipVozila = TipVozilaEnum.Podrazumevani;
                 }
 
-                string Musterija = lineVoznje[i * 19 + 6];
+                string Musterija = lineVoznje[i * 20 + 6];
 
-                string x1 = lineVoznje[i * 19 + 7];
-                string y1 = lineVoznje[i * 19 + 8];
-                string adresa1 = lineVoznje[i * 19 + 9];
+                string x1 = lineVoznje[i * 20 + 7];
+                string y1 = lineVoznje[i * 20 + 8];
+                string adresa1 = lineVoznje[i * 20 + 9];
                 adresa1 += ",";
-                adresa1 += lineVoznje[i * 19 + 10];
+                adresa1 += lineVoznje[i * 20 + 10];
                 Lokacija odrediste = new Lokacija(x1, y1, adresa1);
 
-                string Dispecer = lineVoznje[i * 19 + 11];
-                string Vozac = lineVoznje[i * 19 + 12];
-                double Iznos = Double.Parse(lineVoznje[i * 19 + 13]);
+                string Dispecer = lineVoznje[i * 20 + 11];
+                string Vozac = lineVoznje[i * 20 + 12];
+                double Iznos = Double.Parse(lineVoznje[i * 20 + 13]);
 
-                string Opis = lineVoznje[i * 19 + 14];
-                DateTime datumObjave = DateTime.Parse(lineVoznje[i * 19 + 15]);
-                string KomentarKorisnik = lineVoznje[i * 19 + 16];
-                DateTime Voznja = DateTime.Parse(lineVoznje[i * 19 + 17]);
-                int ocenaVoznje = Int32.Parse(lineVoznje[i * 19 + 18]);
+                string Opis = lineVoznje[i * 20 + 14];
+                DateTime datumObjave = DateTime.Parse(lineVoznje[i * 20 + 15]);
+                string KomentarKorisnik = lineVoznje[i * 20 + 16];
+                DateTime Voznja = DateTime.Parse(lineVoznje[i * 20 + 17]);
+                int ocenaVoznje = Int32.Parse(lineVoznje[i * 20 + 18]);
 
                 Komentar Komentar = new Komentar(Opis,datumObjave,KomentarKorisnik,Voznja,ocenaVoznje);
 
                 StatusVoznje statusVoznje = StatusVoznje.Kreirana;
 
-                if(lineVoznje[i * 19 + 19].Equals("Kreirana"))
+                if(lineVoznje[i * 20 + 19].Equals("Kreirana"))
                 {
                     statusVoznje = StatusVoznje.Kreirana;
                 }
-                else if (lineVoznje[i * 19 + 19].Equals("Otkazana"))
+                else if (lineVoznje[i * 20 + 19].Equals("Otkazana"))
                 {
                     statusVoznje = StatusVoznje.Otkazana;
                 }
-                else if (lineVoznje[i * 19 + 19].Equals("Formirana"))
+                else if (lineVoznje[i * 20 + 19].Equals("Formirana"))
                 {
                     statusVoznje = StatusVoznje.Formirana;
                 }
-                else if (lineVoznje[i * 19 + 19].Equals("Odradjena"))
+                else if (lineVoznje[i * 20 + 19].Equals("Odradjena"))
                 {
                     statusVoznje = StatusVoznje.Odradjena;
                 }
-                else if (lineVoznje[i * 19 + 19].Equals("Prihvacena"))
+                else if (lineVoznje[i * 20 + 19].Equals("Prihvacena"))
                 {
                     statusVoznje = StatusVoznje.Prihvacena;
                 }
-                else if (lineVoznje[i * 19 + 19].Equals("Neuspesna"))
+                else if (lineVoznje[i * 20 + 19].Equals("Neuspesna"))
                 {
                     statusVoznje = StatusVoznje.Neuspesna;
                 }
-                else if (lineVoznje[i * 19 + 19].Equals("Uspesna"))
+                else if (lineVoznje[i * 20 + 19].Equals("Uspesna"))
                 {
                     statusVoznje = StatusVoznje.Uspesna;
                 }
@@ -184,6 +184,7 @@ namespace WebAPI
                 }
 
                 ListaMusterija.Musterije.Add(new Musterija(line1[i*8],line1[i*8+1], line1[i*8+2], line1[i*8+3],polTemp2, line1[i*8+5], line1[i*8+6], line1[i*8+7],UlogaEnum.Musterija,listaTemp2));
+                
             }
 
             ///////////////////////////////// UCITAVANJE VOZACA IZ FAJLA

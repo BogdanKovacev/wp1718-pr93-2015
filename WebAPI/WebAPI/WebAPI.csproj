@@ -181,6 +181,7 @@
     <Compile Include="Controllers\IzmenaVoznjeController.cs" />
     <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\KomentarVozacController.cs" />
+    <Compile Include="Controllers\KorisniciController.cs" />
     <Compile Include="Controllers\LogginController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\MusterijaZahtevController.cs" />
