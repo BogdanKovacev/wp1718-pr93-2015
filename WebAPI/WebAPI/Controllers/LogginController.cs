@@ -131,7 +131,7 @@ namespace WebAPI.Controllers
         {
             Korisnik k = (Korisnik)HttpContext.Current.Session["ulogovan"];
             
-            return k;
+            return Temp.M;
         }
 
     }

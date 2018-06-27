@@ -96,7 +96,6 @@
         function pom2(i) {
 
             var temp = i;
-            alert(temp);
             let voznja =
 			{
 			    KorisnickoImeVozaca: `${temp}`,
@@ -108,9 +107,8 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (data) {
-                    alert("success2");
                     document.getElementById("tab2").click();
-                    $("#lokacijaZahtev").val(data.Odrediste.Adresa);
+                    $("#lokacijaZahtev").val(data.Odrediste.X + "," + data.Odrediste.Y + "," +data.Odrediste.Adresa);
                     if (data.TipVozila == 0) {
                         $("#PutnickiZahtev").attr("selected", "true");
                     }
@@ -262,8 +260,6 @@
         }
 
         function sortirajDatum() {
-            alert("DATUM SORTIRAJ");
-
             $.ajax({
                 url: 'api/sortiranjeDatuma/get',
                 method: 'GET',
@@ -319,8 +315,6 @@
         }
 
         function sortirajOcena() {
-            alert("OCENA SORTIRAJ");
-
             $.ajax({
                 url: 'api/sortiranjeOcena/get',
                 method: 'GET',
@@ -376,8 +370,6 @@
         }
 
         function pretraziDatum() {
-            alert("DATUM");
-
             let voznja =
 			{
 			    Od: `${$("#od").val()}`,
@@ -492,7 +484,6 @@
         }
 
         function pretraziOcena() {
-            alert("OCENA");
             let voznja =
 			{
 			    OdOcena: `${$("#odOcena").val()}`,
@@ -729,7 +720,6 @@
         }
 
         function oceni(i) {
-            alert("OCENI");
             var pom = i;
             globalSet(pom);
             loadKomentarMusterija();
@@ -861,7 +851,6 @@
 <body>
     <h1>MUSTERIJA</h1>
     <!-- Tab links -->
-    <button class="tablink" id="MapaTab" onclick="openPage('Mapa', this)">Mapa</button>
     <button class="tablink" id="tab1" onclick="openPage('My Profile', this)">My Profile</button>
     <button class="tablink" id="tab2" onclick="openPage('Zahtev za voznju', this)">Zahtev za voznju</button>
     <button class="tablink" id="Voznje" onclick="openPage('Voznje na cekanju', this)">Voznje na cekanju</button>
@@ -997,6 +986,7 @@
         </p>
 
     </div>
+
     <div id="Zahtev za voznju" class="tabcontent">
         <div id="map"></div>
         </br>
@@ -1025,7 +1015,6 @@
             ZahtevValidate();
         </script>
     </div>
-
 
     <div id="Voznje na cekanju" class="tabcontent">
             <table border="1" id="tabela">

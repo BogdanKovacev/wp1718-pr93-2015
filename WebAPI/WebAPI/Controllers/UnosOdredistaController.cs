@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
         {
             foreach (Voznja v in Temp.V.VoznjeKorisnika)
             {
-                if (v.StatusVoznje.Equals(StatusVoznje.Formirana) || v.StatusVoznje.Equals(StatusVoznje.Kreirana))
+                if (v.StatusVoznje.Equals(StatusVoznje.Formirana) || v.StatusVoznje.Equals(StatusVoznje.Kreirana) || v.StatusVoznje.Equals(StatusVoznje.Prihvacena))
                 {
                     v.Iznos = double.Parse(voznja.Iznos);
                     v.Odrediste = new Lokacija();
