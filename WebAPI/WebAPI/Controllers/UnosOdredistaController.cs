@@ -35,6 +35,7 @@ namespace WebAPI.Controllers
                             v1.Iznos = double.Parse(voznja.Iznos);
                             v1.Odrediste.Adresa = voznja.Adresa;
                             v1.StatusVoznje = StatusVoznje.Uspesna;
+                            v1.Pomoc = 1;
 
                             //////////////////////// IZMENI VOZNJU U BAZI
 

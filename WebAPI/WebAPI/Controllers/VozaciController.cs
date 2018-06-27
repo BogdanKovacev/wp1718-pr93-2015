@@ -14,11 +14,58 @@ namespace WebAPI.Controllers
         public List<Vozac> Get()
         {
             List<Vozac> ret = new List<Vozac>();
-
+            List<Vozac> ret1 = new List<Vozac>();
+            List<Vozac> petNajblizih = new List<Vozac>();
+            double min = -1;
             foreach (Vozac vozac in ListaVozaca.Vozaci)
             {
                 if (vozac.Slobodan)
                     ret.Add(vozac);
+            }
+
+            if(ret.Count <= 5)
+            {
+                return ret;
+            }
+            else
+            {
+                for(int i = 0; i < ret.Count(); i++)
+                {
+                    foreach (Voznja v in Voznje.SveVoznje)
+                    {
+                        double rastojanje = Math.Sqrt(Math.Pow(double.Parse(v.LokacijaTaksija.X) - double.Parse(ret[i].Lokacija.X), 2) - Math.Pow(double.Parse(v.LokacijaTaksija.Y) - double.Parse(ret[i].Lokacija.Y), 2));
+                        ret[i].Rastojanje = rastojanje;
+                    }
+                }
+                
+                for(int temp = 0; temp < 5; temp++)
+                {
+                    min = ret[0].Rastojanje; // PRETPOSTAVKA DA JE PRVI U LISTI NAJBLIZI
+                    foreach (Vozac i in ret)
+                    {
+                        if(min > i.Rastojanje)
+                        {
+                            min = i.Rastojanje;
+                        }
+                    }
+
+                    foreach(Vozac v in ret)
+                    {
+                        if(v.Rastojanje == min)
+                        {
+                            petNajblizih.Add(v);
+                            ret.Remove(v);
+                        }
+                    }
+
+                    if(petNajblizih.Count() == 5)
+                    {
+                        break;
+                    }
+                }
+                
+               
+                
             }
 
             return ret;

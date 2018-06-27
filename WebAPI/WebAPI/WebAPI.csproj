@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmenaController.cs" />
     <Compile Include="Controllers\IzmenaVoznjeController.cs" />
+    <Compile Include="Controllers\Komentar2Controller.cs" />
     <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\KomentarVozacController.cs" />
     <Compile Include="Controllers\KorisniciController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Controllers\PretragaOcenaController.cs" />
     <Compile Include="Controllers\PretragaOcenaDispecerController.cs" />
     <Compile Include="Controllers\PretragaOcenaVozacController.cs" />
+    <Compile Include="Controllers\PrihvatiVoznjuVozacController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SortirajDatumDispecerController.cs" />
@@ -250,6 +252,7 @@
     <Content Include="htmlStranice\error.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="htmlStranice\HtmlKomentarMusterija.html" />
     <Content Include="htmlStranice\HtmlKomentarVozac.html" />
     <Content Include="htmlStranice\HtmlUnosOdredista.html" />
     <Content Include="htmlStranice\login.html" />

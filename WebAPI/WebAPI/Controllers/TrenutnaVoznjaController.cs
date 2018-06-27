@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         {
             foreach (Voznja voznja in Temp.V.VoznjeKorisnika)
             {
-                if (voznja.StatusVoznje.Equals(StatusVoznje.Kreirana) || voznja.StatusVoznje.Equals(StatusVoznje.Formirana))
+                if (voznja.StatusVoznje.Equals(StatusVoznje.Kreirana) || voznja.StatusVoznje.Equals(StatusVoznje.Formirana) || voznja.StatusVoznje.Equals(StatusVoznje.Prihvacena))
                     return voznja;
             }
 

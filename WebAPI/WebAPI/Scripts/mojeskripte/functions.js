@@ -22,6 +22,10 @@ function loadUnosOdredista() {
     $("div#pocetnaDiv").load("./htmlStranice/HtmlUnosOdredista.html");
 }
 
+function loadKomentarMusterija() {
+    $("div#pocetnaDiv").load("./htmlStranice/HtmlKomentarMusterija.html");
+}
+
 function doRegistrationSubmit() {
 
     let korisnik = {
@@ -721,8 +725,16 @@ function displayLocation(latitude, longitude) {
     return address.formatted_address;
 };
 
+var a;
 var b;
 
+function globalSet(index) {
+    a = index;
+}
+
+function globalReturn() {
+    return a;
+}
 function globalSet2(index) {
     b = index;
 }

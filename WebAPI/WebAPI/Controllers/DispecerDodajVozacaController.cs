@@ -41,8 +41,8 @@ namespace WebAPI.Controllers
                     break;
                 }
             }
-
-            vozacP.Lokacija = new Lokacija("44°49'04.127", "44°49'04.127", "Sutjeska 3, Novi Sad 21000");
+            Lokacija l = new Lokacija();
+            vozacP.Lokacija = new Lokacija(l.Random(), l.Random(), "Sutjeska 3, Novi Sad 21000");
 
             ListaVozaca.Vozaci.Add(vozacP);
 

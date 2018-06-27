@@ -35,7 +35,7 @@ namespace WebAPI.Models
             this.KontaktTelefon = kontaktTelefon;
             this.Email = email;
             this.Uloga = uloga;
-            this.VoznjeKorisnika = new List<Voznja>();
+            this.VoznjeKorisnika = voznjeKorisnika;
             Blokiran = false;
         }
     }

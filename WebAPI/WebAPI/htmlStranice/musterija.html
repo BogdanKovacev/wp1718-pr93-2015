@@ -197,7 +197,13 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
@@ -300,7 +306,13 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>"+ tipVoznje+ "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
@@ -351,7 +363,13 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>"+ tipVoznje+ "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
@@ -410,7 +428,13 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
@@ -519,7 +543,13 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
@@ -578,7 +608,13 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>" + tipVoznje + "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
@@ -680,10 +716,23 @@
                             tipVoznje = "Uspesna";
                         }
                         var txt7 = $("<td></td>").text(data[i].Vozac)
-                        $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4, txt5, "<td>"+ tipVoznje+ "</td>", txt7, "</tr>");
+                        if (data[i].Pomoc == 0) {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                        }
+
+                        else {
+                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                        }
                     }
                 }
             });
+        }
+
+        function oceni(i) {
+            alert("OCENI");
+            var pom = i;
+            globalSet(pom);
+            loadKomentarMusterija();
         }
 
 
@@ -750,12 +799,13 @@
             });
             $("#sveVoznje").click(function () {
                 $("#sveVoznjeMusterijaTabela").empty();
-                var s1 = $("<th></th>").text("Adresa");
+                var s1 = $("<th></th>").text("Pocetna Adresa");
+                var s2 = $("<th></th>").text("Krajnja Adresa");
                 var s4 = $("<th></th>").text("Dispecer");
                 var s5 = $("<th></th>").text("Iznos");
                 var s6 = $("<th></th>").text("Status voznje");
                 var s7 = $("<th></th>").text("Vozac");
-                $("#sveVoznjeMusterijaTabela").append("<tr>", s1, s4, s5, s6, s7, "</tr>");
+                $("#sveVoznjeMusterijaTabela").append("<tr>", s1,s2, s4, s5, s6, s7, "</tr>");
                 $.ajax({
                     url: '/api/sveVoznjeMusterija',
                     method: 'GET',                
@@ -763,7 +813,8 @@
                         var i;
                         var tipVoznje;
                         for (i = 0; i < data.length; i++) {
-                            var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa);
+                            var txt1 = $("<td></td>").text(data[i].LokacijaTaksija.Adresa); 
+                            var txt2 = $("<td></td>").text(data[i].Odrediste.Adresa);
                             var txt4 = $("<td></td>").text(data[i].Dispecer);
                             var txt5 = $("<td></td>").text(data[i].Iznos);
                             if (data[i].StatusVoznje == 0) {
@@ -788,7 +839,15 @@
                                 tipVoznje = "Uspesna";
                             }
                             var txt7 = $("<td></td>").text(data[i].Vozac)
-                            $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt4, txt5, "<td>", tipVoznje, "</td>", txt7, "</tr>");
+
+                            if (data[i].Pomoc == 0) {
+                                $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5,"<td>" + tipVoznje + "</td>", txt7, "<td></td>", "</tr>");
+                            }
+
+                            else {
+                                $("#sveVoznjeMusterijaTabela").append("<tr>", txt1, txt2, txt4,txt5, "<td>" + tipVoznje + "</td>", txt7, `<td><input type="submit" value="OCENI" onclick="oceni(${i})"></td>", "</tr>`);
+                            }
+
                         }
                     }
                 });
